@@ -6,7 +6,8 @@
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
 # init-hook for openerp: when launched from inside server, add openerp path
-init-hook=import os, sys, re; s = re.search('.*/server', os.getcwd()); src_path = s.group(0) if s else None; src_path and sys.path.append(src_path + "/openerp")
+#init-hook=import os, sys, re; s = re.search('.*/src', os.getcwd()); src_path = s.group(0) if s else None; src_path and sys.path.append(src_path + "/server/openerp")
+init-hook=import os, sys, re; s = re.search('.*/(src|parts)', os.getcwd()); src_path = s.group(0) if s else None; src_path and sys.path.append(src_path + "/server")
 
 # Profiled execution.
 profile=no
@@ -36,7 +37,9 @@ load-plugins=
 # it should appear only once).
 # C0301 = line too long, disabled for openerp where this is sadly too common
 # W0142 = "Used * or ** magic"
-disable=C0301,W0142
+# C0103 = Invalid name "cr" (should match [a-z_][a-z0-9_]{2,30}$)
+# R0904 =  Too many public methods (40/20)
+disable=C0301,W0142,C0103,R0904
 
 
 [REPORTS]

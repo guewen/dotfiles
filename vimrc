@@ -40,7 +40,9 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
-Bundle 'davidhalter/jedi-vim'
+" Bundle 'davidhalter/jedi-vim'
+Bundle 'vim-scripts/DrawIt'
+Bundle 'benzheren/vim-python'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -328,3 +330,5 @@ let g:gundo_preview_bottom = 1
 " save a vim session
 :nnoremap <F8> :wa<Bar>exe "mksession! " . v:this_session<CR>
 
+" highlight the current line when the current mode is Insert
+autocmd InsertEnter,InsertLeave * set cul!
