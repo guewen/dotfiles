@@ -27,7 +27,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-cucumber'
 Bundle 'scrooloose/syntastic'
 Bundle 'godlygeek/tabular'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'benmills/vimux'
 Bundle 'actionshrimp/vim-xpath'
 Bundle 'vim-scripts/argtextobj.vim'
@@ -42,7 +42,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
 " Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/DrawIt'
-Bundle 'benzheren/vim-python'
+" Bundle 'benzheren/vim-python'
+Bundle 'klen/python-mode'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -297,16 +298,19 @@ set shortmess=atI
 nmap <F8> :TagbarToggle<CR>
 
 " display fancy symbols in status bar with vim-powerline
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 " Powerline colorscheme optimized for Solarized
-let g:Powerline_colorscheme = 'skwp'
+" let g:Powerline_colorscheme = 'skwp'
 
 " add a segment in Powerline status bar which display a marker
 " when current buffer has trailing whitespaces
-call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-
+" call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
+"
+" disable syntastic because checkers are already in python-mode
+let g:loaded_python_syntax_checker = 1
 " Syntax checker for python (flake8, pyflakes, pylint)
-let g:syntastic_python_checker = 'pylint'
+"let g:syntastic_python_checker = 'pylint'
+let g:syntastic_python_checker = ''
 
 
 " hidden files in Netrw
@@ -332,3 +336,12 @@ let g:gundo_preview_bottom = 1
 
 " highlight the current line when the current mode is Insert
 autocmd InsertEnter,InsertLeave * set cul!
+
+" python-mode
+let g:pymode_lint_checker = "pylint,pep8,mccabe"
+
+" Autoremove unused whitespaces
+let g:pymode_utils_whitespaces = 0
+
+" Auto open cwindow if errors be finded
+let g:pymode_lint_cwindow = 0
