@@ -20,7 +20,13 @@ Bundle 'gmarik/vundle'
 " original repos on github
 " Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'msanders/snipmate.vim'
+"Bundle 'msanders/snipmate.vim'
+" snipmate fork, compatible with supertab
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle 'garbas/vim-snipmate'
+" collection of snippets
+" Bundle 'honza/vim-snippets'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-surround'
@@ -44,6 +50,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/DrawIt'
 " Bundle 'benzheren/vim-python'
 Bundle 'klen/python-mode'
+" Editing CSV
+Bundle 'chrisbra/csv.vim'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -63,6 +71,10 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+
+" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being
+" created
+set noswapfile
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -345,3 +357,12 @@ let g:pymode_utils_whitespaces = 0
 
 " Auto open cwindow if errors be finded
 let g:pymode_lint_cwindow = 0
+
+" shortcut to delete in the black hole register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+" shortcut to paste but keeping the current register
+vnoremap <leader>p "_dP
+
+" allow :W for :write
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
