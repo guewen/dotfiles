@@ -137,12 +137,15 @@ else
 
 endif " has("autocmd")
 
+" Folding {{{
 if has("folding")
-  set foldenable
-  set foldmethod=syntax
-  set foldlevel=1
-  set foldnestmax=3
-  set foldcolumn=2
+  set foldenable            " enable folding
+  set foldmethod=indent     " fold based on indent level
+  set foldlevelstart=10     " open most folds by default
+  set foldnestmax=10        " 10 nested fold max
+  set foldcolumn=3
+  " space open/closes folds
+  nnoremap <space> za
   set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
 
   if has("autocmd")
@@ -150,6 +153,7 @@ if has("folding")
     autocmd FileType python,xml set foldmethod=indent
   endif
 endif
+" }}}
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -366,3 +370,22 @@ vnoremap <leader>p "_dP
 
 " allow :W for :write
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+
+" Tmux {{{
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" }}}
+
+" Misc {{{
+set modelines=1  " interpret the modelines at the bottom of the files
+" }}}
+
+
+" vim:foldmethod=marker:foldlevel=0
