@@ -4,9 +4,11 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+
+" Vundle {{{
+
 " required for vundle
 filetype off
-
 " vundle : Vim plugin manager
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -61,6 +63,9 @@ Bundle 'chrisbra/csv.vim'
  " Bundle 'git://git.wincent.com/command-t.git'
 
 filetype plugin indent on     " required!
+
+" }}}
+
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -143,7 +148,7 @@ if has("folding")
   set foldmethod=indent     " fold based on indent level
   set foldlevelstart=10     " open most folds by default
   set foldnestmax=10        " 10 nested fold max
-  set foldcolumn=3
+  set foldcolumn=0
   " space open/closes folds
   nnoremap <space> za
   set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
@@ -155,10 +160,12 @@ if has("folding")
 endif
 " }}}
 
+" Tabs {{{
 " Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
+" }}}
 
 " Always display the status line
 set laststatus=2
@@ -370,6 +377,15 @@ vnoremap <leader>p "_dP
 
 " allow :W for :write
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+" Undo {{{
+
+set undodir=~/.vim/undodir
+set undofile
+set undolevels = 1000 "maximum number of changes that can be undone
+set undoreload = 10000 "maximum number lines to save for undo on a buffer reload
+
+" }}}
 
 
 " Tmux {{{
