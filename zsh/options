@@ -1,6 +1,7 @@
 unsetopt beep
 unsetopt hist_beep
 unsetopt list_beep
+unsetopt correct_all  # disable autocorrect
 export HISTORY=5000
 export SAVEHIST=5000
 

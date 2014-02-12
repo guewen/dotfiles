@@ -4,9 +4,11 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+
+" Vundle {{{
+
 " required for vundle
 filetype off
-
 " vundle : Vim plugin manager
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -20,7 +22,13 @@ Bundle 'gmarik/vundle'
 " original repos on github
 " Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'msanders/snipmate.vim'
+"Bundle 'msanders/snipmate.vim'
+" snipmate fork, compatible with supertab
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle 'garbas/vim-snipmate'
+" collection of snippets
+" Bundle 'honza/vim-snippets'
 Bundle 'majutsushi/tagbar'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-surround'
@@ -44,6 +52,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/DrawIt'
 " Bundle 'benzheren/vim-python'
 Bundle 'klen/python-mode'
+" Editing CSV
+Bundle 'chrisbra/csv.vim'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -54,6 +64,9 @@ Bundle 'klen/python-mode'
 
 filetype plugin indent on     " required!
 
+" }}}
+
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -63,6 +76,10 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+
+" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being
+" created
+set noswapfile
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -125,12 +142,15 @@ else
 
 endif " has("autocmd")
 
+" Folding {{{
 if has("folding")
-  set foldenable
-  set foldmethod=syntax
-  set foldlevel=1
-  set foldnestmax=3
-  set foldcolumn=2
+  set foldenable            " enable folding
+  set foldmethod=indent     " fold based on indent level
+  set foldlevelstart=10     " open most folds by default
+  set foldnestmax=10        " 10 nested fold max
+  set foldcolumn=0
+  " space open/closes folds
+  nnoremap <space> za
   set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
 
   if has("autocmd")
@@ -138,11 +158,14 @@ if has("folding")
     autocmd FileType python,xml set foldmethod=indent
   endif
 endif
+" }}}
 
+" Tabs {{{
 " Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
+" }}}
 
 " Always display the status line
 set laststatus=2
@@ -345,3 +368,40 @@ let g:pymode_utils_whitespaces = 0
 
 " Auto open cwindow if errors be finded
 let g:pymode_lint_cwindow = 0
+
+" shortcut to delete in the black hole register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+" shortcut to paste but keeping the current register
+vnoremap <leader>p "_dP
+
+" allow :W for :write
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+" Undo {{{
+
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+" }}}
+
+
+" Tmux {{{
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" }}}
+
+" Misc {{{
+set modelines=1  " interpret the modelines at the bottom of the files
+" }}}
+
+
+" vim:foldmethod=marker:foldlevel=0

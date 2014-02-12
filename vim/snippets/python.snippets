@@ -11,7 +11,7 @@ snippet agpl
 	##############################################################################
 	#
 	#    Author: Guewen Baconnier
-	#    Copyright 2013 Camptocamp SA
+	#    Copyright 2014 Camptocamp SA
 	#
 	#    This program is free software: you can redistribute it and/or modify
 	#    it under the terms of the GNU Affero General Public License as
@@ -38,12 +38,15 @@ snippet __openerp__
 	 'depends' : [${5:depends}],
 	 'description': """${6:description}""",
 	 'website': 'http://www.camptocamp.com',
-	 'init_xml': [],
-	 'update_xml': [],
-	 'demo_xml': [],
-	 'tests': [],
+	 'data': [],
+	 'test': [],
 	 'installable': True,
 	 'auto_install': False,
 	}
 snippet pool
-	self.pool.get('${1}')${2}
+	self.pool['${1}']${2}
+snippet orm
+	from openerp.osv import orm, fields
+snippet Model
+	class ${1:name}(orm.Model):
+	    _inherit = '${2:model}'

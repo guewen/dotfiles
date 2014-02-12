@@ -2,3 +2,5 @@
 --type-set=rml=.rml
 --type-set=csv=.csv
 --type-set=feature=.feature
+--type-set=rst=.rst
+--type-set=yaml=.yml
