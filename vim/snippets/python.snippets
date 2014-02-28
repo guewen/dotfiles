@@ -28,14 +28,14 @@ snippet agpl
 	#
 	##############################################################################
 snippet __openerp__
-	{'name' : '${1:name}',
-	 'version' : '${2:version}',
-	 'author' : 'Camptocamp',
+	{'name': '${1:name}',
+	 'version': '${2:version}',
+	 'author': 'Camptocamp',
 	 'maintainer': 'Camptocamp',
 	 'license': 'AGPL-3',
 	 'category': '${3:category}',
 	 'complexity': "${4:complexity}",  # easy, normal, expert
-	 'depends' : [${5:depends}],
+	 'depends': [${5:depends}],
 	 'description': """${6:description}""",
 	 'website': 'http://www.camptocamp.com',
 	 'data': [],
@@ -50,3 +50,5 @@ snippet orm
 snippet Model
 	class ${1:name}(orm.Model):
 	    _inherit = '${2:model}'
+	
+	    ${3}
