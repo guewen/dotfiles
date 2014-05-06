@@ -4,7 +4,8 @@ URxvt*termName:                       rxvt-256color
 URxvt*:borderLess:                    true
 URxvt*cursorBlink:                    true
 !URxvt*font: xft:Inconsolata-dz\ for\ Powerline:pixelsize=12:antialias=true:hinting=true
-URxvt*font: xft:Droid\ Sans\ Mono\ for\ Powerline:style=Regular:pixelsize=13:antialias=true:hinting=true
+!URxvt*font: xft:Droid\ Sans\ Mono\ for\ Powerline:style=Regular:pixelsize=13:antialias=true:hinting=true
+URxvt*font: xft:monoOne:style=Regular:pixelsize=10:antialias=true:hinting=true
 URxvt*jumpScroll:                     true
 URxvt*scrollBar:                      false
 URxvt*scrollTtyOutput:                false
