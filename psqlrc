@@ -9,10 +9,10 @@
 
 -- By default, NULL displays as an empty space. Is it actually an empty
 -- string, or is it null? This makes that distinction visible.
-\pset null '<NULL>'
+-- \pset null '<NULL>'
 
 -- Verbose error reports.
-\set VERBOSITY verbose
+-- \set VERBOSITY verbose
 
 -- Autocomplete keywords (like SELECT) in upper-case, even if you started
 -- typing them in lower case.
