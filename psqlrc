@@ -1,0 +1,51 @@
+-- https://speakerdeck.com/pycon2014/postgres-performance-for-humans-by-craig-kerstiens
+\set ON_ERROR_ROLLBACK interactive
+
+-- automatically switch between extended and normal
+\x auto
+
+-- always show how long a query takes
+\timing
+
+-- By default, NULL displays as an empty space. Is it actually an empty
+-- string, or is it null? This makes that distinction visible.
+-- \pset null '<NULL>'
+
+-- Verbose error reports.
+-- \set VERBOSITY verbose
+
+-- Autocomplete keywords (like SELECT) in upper-case, even if you started
+-- typing them in lower case.
+\set COMP_KEYWORD_CASE upper
+
+-- http://opensourcedbms.com/dbms/psqlrc-psql-startup-file-for-postgres/
+
+\echo '\t\t\t:settings\t-- Server Settings'
+\echo '\t\t\t:conninfo\t-- Server connections'
+\echo '\t\t\t:activity\t-- Server activity'
+\echo '\t\t\t:locks\t\t-- Lock info'
+\echo '\t\t\t:waits\t\t-- Waiting queries'
+\echo '\t\t\t:dbsize\t\t-- Database Size'
+\echo '\t\t\t:tablesize\t-- Tables Size'
+\echo '\t\t\t:show_slow_queries\t-- Slow Queries'
+\echo '\t\t\t:menu\t\t-- Help Menu'
+\echo '\t\t\t\\h\t\t-- Help with SQL commands'
+\echo '\t\t\t\\?\t\t-- Help with psql commands\n'
+
+\set menu '\\i ~/.psqlrc'
+
+\set settings 'select name, setting,unit,context from pg_settings;'
+
+\set locks  'SELECT bl.pid AS blocked_pid, a.usename AS blocked_user, kl.pid AS blocking_pid, ka.usename AS blocking_user, a.current_query AS blocked_statement FROM pg_catalog.pg_locks bl JOIN pg_catalog.pg_stat_activity a ON bl.pid = a.procpid JOIN pg_catalog.pg_locks kl JOIN pg_catalog.pg_stat_activity ka ON kl.pid = ka.procpid ON bl.transactionid = kl.transactionid AND bl.pid != kl.pid WHERE NOT bl.granted;'
+
+\set conninfo 'select usename, count(*) from pg_stat_activity group by usename;'
+
+\set activity 'SELECT datname,usename,procpid,client_addr,waiting,query_start,current_query FROM pg_stat_activity;'
+
+\set waits 'SELECT pg_stat_activity.procpid, pg_stat_activity.current_query, pg_stat_activity.waiting, now() - pg_stat_activity.query_start AS \"totaltime\", pg_stat_activity.backend_start FROM pg_stat_activity WHERE pg_stat_activity.current_query !~ \'%IDLE%\'::text AND pg_stat_activity.waiting = true;'
+
+\set dbsize 'SELECT datname, pg_size_pretty(pg_database_size(datname)) db_size FROM pg_database ORDER BY db_size;'
+
+\set tablesize 'SELECT nspname || \'.\' || relname AS \"relation\", pg_size_pretty(pg_relation_size(C.oid)) AS "size" FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') ORDER BY pg_relation_size(C.oid) DESC LIMIT 40;'
+
+\set show_slow_queries 'SELECT (total_time / 1000 / 60) as total_minutes, (total_time / calls) as average_time, query FROM pg_stat_statements ORDER BY 1 DESC LIMIT 100;'

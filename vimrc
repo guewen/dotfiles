@@ -54,6 +54,8 @@ Bundle 'vim-scripts/DrawIt'
 Bundle 'klen/python-mode'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
+" Powerline
+Bundle 'Lokaltog/powerline'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -133,6 +135,8 @@ if has("autocmd")
   autocmd FileType python set omnifunc=pythoncomplete#Complete
   autocmd FileType python highlight OverLength ctermbg=darkgrey guibg=#592929
   autocmd FileType python match OverLength /\%80v.*/
+
+  autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
   augroup END
 
@@ -401,6 +405,10 @@ endif
 
 " Misc {{{
 set modelines=1  " interpret the modelines at the bottom of the files
+" }}}
+
+" Powerline {{{
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " }}}
 
 
