@@ -54,6 +54,8 @@ Bundle 'vim-scripts/DrawIt'
 Bundle 'klen/python-mode'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
+" Powerline
+Bundle 'Lokaltog/powerline'
 
  " vim-scripts repos
 " Bundle 'L9'
@@ -403,6 +405,10 @@ endif
 
 " Misc {{{
 set modelines=1  " interpret the modelines at the bottom of the files
+" }}}
+
+" Powerline {{{
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 " }}}
 
 
