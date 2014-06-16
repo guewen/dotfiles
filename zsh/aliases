@@ -42,3 +42,6 @@ alias tx='tmuxinator'
 
 # commands starting with % for pasting from web
 alias %=' '
+
+# hub (git wrapper for github)
+alias g=hub
