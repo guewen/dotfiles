@@ -3,10 +3,16 @@
 	email = <%= print("Your Email: "); STDOUT.flush; STDIN.gets.chomp %>
 [alias]
 	co = checkout
+  ui = auto
 [color]
 	diff = auto
 	status = auto
 	branch = auto
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
+  prompt = false
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
 	editor = vim
