@@ -136,8 +136,6 @@ if has("autocmd")
   autocmd FileType python highlight OverLength ctermbg=darkgrey guibg=#592929
   autocmd FileType python match OverLength /\%80v.*/
 
-  autocmd FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
-
   augroup END
 
 else
