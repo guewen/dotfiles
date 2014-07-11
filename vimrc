@@ -100,6 +100,7 @@ endif
 " Switch wrap off for everything
 set nowrap
 
+" autocmd {{{
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
   " Enable file type detection.
@@ -113,6 +114,8 @@ if has("autocmd")
 
   " Enable soft-wrapping for text files
   autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
+  " Activate spell checking for text files
+  autocmd FileType text,markdown,html,xhtml,eruby set spell
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -143,6 +146,7 @@ else
   set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
+" }}}
 
 " Folding {{{
 if has("folding")
@@ -206,9 +210,6 @@ au! BufRead,BufNewFile *.haml         setfiletype haml
 
 " For rml
 au! BufRead,BufNewFile *.rml set ft=xml
-
-" No Help, please
-nmap <F1> <Esc>
 
 " Press ^F from insert mode to insert the current file name
 imap <C-F> <C-R>=expand("%")<CR>
@@ -282,11 +283,6 @@ set visualbell
 " tabs for ruby
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
 
-" toggle display of unprintable chars
-map<C-F12> <ESC>:set list!<CR>
-" toggle auto wrap
-map<F12> <ESC>:set wrap!<CR>
-
 " keep selection when indent / unindent
 vnoremap < <gv
 vnoremap > >gv
@@ -300,9 +296,6 @@ noremap  <Left> ""
 noremap! <Left> <Esc>
 noremap  <Right> ""
 noremap! <Right> <Esc>
-
-" regenerate ctags
-:nnoremap <f5> :!ctags -R<CR>
 
 " ignore files
 set wildignore+=*.po,*.pot,*.pyc
@@ -319,8 +312,6 @@ let g:CommandTMatchWindowAtTop=1
 " Stifle many interruptive prompts
 set shortmess=atI
 
-" toggle tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " display fancy symbols in status bar with vim-powerline
 " let g:Powerline_symbols = 'fancy'
@@ -351,13 +342,36 @@ let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_files = 0
 let g:ctrlp_working_path_mode = 0
 
+" the gundo preview is below the current window
+let g:gundo_preview_bottom = 1
+
+" F keys shortcuts {{{
+
+" No Help, please
+nmap <F1> <Esc>
+
+" activate spellchecks
+map <silent> <F3> "<Esc>:silent setlocal spell! spelllang=en<CR>"
+map <silent> <F4> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
+
+" regenerate ctags
+:nnoremap <F5> :!ctags -R<CR>
+
 " display gundo graph
 nnoremap <F6> :GundoToggle<CR>
-" the preview is below the current window
-let g:gundo_preview_bottom = 1
 
 " save a vim session
 :nnoremap <F8> :wa<Bar>exe "mksession! " . v:this_session<CR>
+
+" toggle tagbar
+nmap <F9> :TagbarToggle<CR>
+
+" toggle display of unprintable chars
+map<C-F12> <ESC>:set list!<CR>
+" toggle auto wrap
+map<F12> <ESC>:set wrap!<CR>
+
+" }}}
 
 " highlight the current line when the current mode is Insert
 autocmd InsertEnter,InsertLeave * set cul!
