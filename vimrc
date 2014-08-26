@@ -136,9 +136,7 @@ if has("autocmd")
   autocmd BufWritePost .vimrc source $MYVIMRC
 
   autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType python highlight OverLength ctermbg=darkgrey guibg=#592929
-  autocmd FileType python match OverLength /\%80v.*/
-
+  autocmd FileType python set colorcolumn=80
   augroup END
 
 else
@@ -326,7 +324,7 @@ set shortmess=atI
 let g:loaded_python_syntax_checker = 1
 " Syntax checker for python (flake8, pyflakes, pylint)
 "let g:syntastic_python_checker = 'pylint'
-let g:syntastic_python_checker = ''
+let g:syntastic_python_checkers = ''
 
 
 " hidden files in Netrw
@@ -376,14 +374,18 @@ map<F12> <ESC>:set wrap!<CR>
 " highlight the current line when the current mode is Insert
 autocmd InsertEnter,InsertLeave * set cul!
 
-" python-mode
-let g:pymode_lint_checker = "pylint,pep8,mccabe"
+" python-mode {{{
+let g:pymode_lint_checker = "pylint,pep8,mccabe,pep257"
 
 " Autoremove unused whitespaces
-let g:pymode_utils_whitespaces = 0
+let g:pymode_trim_whitespaces = 0
 
 " Auto open cwindow if errors be finded
 let g:pymode_lint_cwindow = 0
+
+let g:pymode_lint_on_fly = 1
+
+" }}}
 
 " shortcut to delete in the black hole register
 nnoremap <leader>d "_d
