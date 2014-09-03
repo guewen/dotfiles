@@ -81,7 +81,7 @@ set incsearch		" do incremental searching
 
 " Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being
 " created
-set noswapfile
+" set noswapfile
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
