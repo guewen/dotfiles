@@ -20,10 +20,6 @@ These are config files to set up a system the way I like it.
 
     xrdb -load ~/.Xresources
 
-  The jedi-vim plugin needs a python module. You need to install the jedi egg
-  if you want a system-wide installation or launch
-  `git submodule update --init` in `~/.dotfiles/vim/bundle/jedi-vim/`
-
 == Environment
 
 I am running on GNU/Linux and my dotfiles includes:
@@ -53,6 +49,7 @@ Standalone installations
 
   rvm (https://rvm.io/rvm/install/)
   oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
+  hub (http://hub.github.com)
 
 
 Python modules:

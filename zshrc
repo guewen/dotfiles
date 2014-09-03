@@ -1,15 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# custom zsh configs
-source ~/.zsh/aliases
-source ~/.zsh/config
-source ~/.zsh/options
-source ~/.zsh/scripts
-source ~/.zsh/tmux
-source ~/.zsh/bindkey
-source ~/.zsh/virtualenvwrapper
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -48,9 +39,19 @@ fi
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git python rake extract bundler vagrant rvm tmuxinator)
+plugins=(git github python rake extract bundler vagrant rvm tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
+
+# custom zsh configs
+source ~/.zsh/aliases
+source ~/.zsh/config
+source ~/.zsh/options
+source ~/.zsh/scripts
+source ~/.zsh/tmux
+source ~/.zsh/bindkey
+source ~/.zsh/virtualenvwrapper
+
 
 # Customize to your needs...
 export PATH=$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/.rvm/bin:$HOME/.local/bin
