@@ -63,6 +63,8 @@ Plugin 'honza/vim-snippets'
 
  " non github repos
  " Bundle 'git://git.wincent.com/command-t.git'
+" Python Color Syntax
+Plugin 'hdima/python-syntax'
 
 filetype plugin indent on     " required!
 
