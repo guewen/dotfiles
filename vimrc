@@ -29,7 +29,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-cucumber'
 Bundle 'scrooloose/syntastic'
 Bundle 'godlygeek/tabular'
-" Bundle 'Lokaltog/vim-powerline'
 Bundle 'benmills/vimux'
 Bundle 'actionshrimp/vim-xpath'
 Bundle 'vim-scripts/argtextobj.vim'
@@ -41,10 +40,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
 Bundle 'sjl/gundo.vim'
-" Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/DrawIt'
-" Bundle 'benzheren/vim-python'
-" Bundle 'klen/python-mode'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
 " Powerline
@@ -56,13 +52,6 @@ Bundle 'Valloric/YouCompleteMe'
 " snippets (compatible with YouCompleteMe)
 Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-"
- " vim-scripts repos
-" Bundle 'L9'
-" Bundle 'pythoncomplete'
-
- " non github repos
- " Bundle 'git://git.wincent.com/command-t.git'
 " Python Color Syntax
 Plugin 'hdima/python-syntax'
 
@@ -244,9 +233,6 @@ colorscheme solarized
 " Numbers
 set number
 set numberwidth=5
-
-" Snippets are activated by Shift+Tab
-let g:snippetsEmu_key = "<S-Tab>"
 
 " Tab completion options
 " (only complete to the longest unambiguous match, and show a menu)
