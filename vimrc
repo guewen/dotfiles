@@ -22,15 +22,9 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'msanders/snipmate.vim'
-" snipmate fork, compatible with supertab
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle 'garbas/vim-snipmate'
-" collection of snippets
-" Bundle 'honza/vim-snippets'
 Bundle 'majutsushi/tagbar'
-Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-cucumber'
 Bundle 'scrooloose/syntastic'
@@ -46,17 +40,23 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'sjl/gundo.vim'
 " Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/DrawIt'
 " Bundle 'benzheren/vim-python'
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
 " Powerline
 Bundle 'Lokaltog/powerline'
-
+" tags for javascript: https://github.com/majutsushi/tagbar/wiki#javascript
+Bundle 'marijnh/tern_for_vim'
+" autocomplete
+Bundle 'Valloric/YouCompleteMe'
+" snippets (compatible with YouCompleteMe)
+Bundle 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+"
  " vim-scripts repos
 " Bundle 'L9'
 " Bundle 'pythoncomplete'
@@ -321,10 +321,12 @@ set shortmess=atI
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
 "
 " disable syntastic because checkers are already in python-mode
-let g:loaded_python_syntax_checker = 1
+let g:loaded_python_syntax_checker = 0
+" close the buffer when the rope completion is done (ref: http://stackoverflow.com/a/26022965)
+" autocmd CompleteDone * pclose
 " Syntax checker for python (flake8, pyflakes, pylint)
 "let g:syntastic_python_checker = 'pylint'
-let g:syntastic_python_checkers = ''
+let g:syntastic_python_checkers = 'flake8'
 
 
 " hidden files in Netrw
@@ -423,6 +425,45 @@ set modelines=1  " interpret the modelines at the bottom of the files
 
 " Powerline {{{
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" }}}
+
+" YouCompleteMe {{{
+let g:ycm_autoclose_preview_window_after_completion=1
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:UltiSnipsExpandTrigger       ="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" Enable tabbing through list of results
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+
+" Expand snippet or return
+let g:ulti_expand_res = 0
+function! Ulti_ExpandOrEnter()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res
+        return ''
+    else
+        return "\<return>"
+endfunction
+
+" Set <space> as primary trigger
+inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " }}}
 
 
