@@ -54,6 +54,8 @@ Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Python Color Syntax
 Plugin 'hdima/python-syntax'
+" Syntax checker on the fly (complement Syntastic/Flake8)
+Plugin 'mitechie/pyflakes-pathogen'
 
 filetype plugin indent on     " required!
 
@@ -123,10 +125,6 @@ if has("autocmd")
     \   exe "normal g`\"" |
     \ endif
 
-  " Automatically load .vimrc source when saved
-  autocmd BufWritePost .vimrc source $MYVIMRC
-
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
   autocmd FileType python set colorcolumn=80
   augroup END
 
@@ -203,9 +201,6 @@ au! BufRead,BufNewFile *.rml set ft=xml
 " Press ^F from insert mode to insert the current file name
 imap <C-F> <C-R>=expand("%")<CR>
 
-" Maps autocomplete to tab
-imap <Tab> <C-N>
-
 imap <C-L> <Space>=><Space>
 
 " Display extra whitespace
@@ -273,16 +268,6 @@ autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
 vnoremap < <gv
 vnoremap > >gv
 
-" disable cross keys
-noremap  <Up> ""
-noremap! <Up> <Esc>
-noremap  <Down> ""
-noremap! <Down> <Esc>
-noremap  <Left> ""
-noremap! <Left> <Esc>
-noremap  <Right> ""
-noremap! <Right> <Esc>
-
 " ignore files
 set wildignore+=*.po,*.pot,*.pyc
 
@@ -307,14 +292,11 @@ set shortmess=atI
 " add a segment in Powerline status bar which display a marker
 " when current buffer has trailing whitespaces
 " call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-"
-" disable syntastic because checkers are already in python-mode
-let g:loaded_python_syntax_checker = 0
-" close the buffer when the rope completion is done (ref: http://stackoverflow.com/a/26022965)
-" autocmd CompleteDone * pclose
+
+" Syntastic {{{ 
 " Syntax checker for python (flake8, pyflakes, pylint)
-"let g:syntastic_python_checker = 'pylint'
-let g:syntastic_python_checkers = 'flake8'
+let g:syntastic_python_checkers = ['python', 'flake8']
+" }}}
 
 
 " hidden files in Netrw
