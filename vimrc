@@ -295,7 +295,7 @@ set shortmess=atI
 
 " Syntastic {{{ 
 " Syntax checker for python (flake8, pyflakes, pylint)
-let g:syntastic_python_checkers = ['python', 'flake8']
+let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
 " }}}
 
 
