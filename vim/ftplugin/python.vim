@@ -23,7 +23,7 @@ import os
 import vim
 cwd = os.getcwd()
 dirname = os.path.split(cwd)[-1]
-if dirname == 'src':
+if dirname in ('src', 'parts', 'specific-parts'):
     for d in os.listdir('.'):
         if not os.path.isdir(d):
             continue
