@@ -37,3 +37,5 @@ EOF
 set formatoptions=cq textwidth=72 foldignore= wildignore+=*.py[co]
 
 setlocal comments=:# commentstring=#\ %s
+
+setlocal spell
