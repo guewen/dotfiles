@@ -6,3 +6,6 @@ bindkey '^[[1~' beginning-of-line
 
 # end key
 bindkey '^[[4~' end-of-line
+
+# insert a pound (#) at beginning of line (ALT-e)
+bindkey '\e#' pound-insert
