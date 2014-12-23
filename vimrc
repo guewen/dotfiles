@@ -56,6 +56,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'hdima/python-syntax'
 " Syntax checker on the fly (complement Syntastic/Flake8)
 Plugin 'mitechie/pyflakes-pathogen'
+" open a selection in a split window
+Plugin 'chrisbra/NrrwRgn'
 
 filetype plugin indent on     " required!
 
