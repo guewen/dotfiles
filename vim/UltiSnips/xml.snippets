@@ -1,0 +1,61 @@
+snippet view "all (tree, form, search, action, menu)" b
+<record id="view_${1/\./_/g}_tree" model="ir.ui.view">
+  <field name="name">$1.tree</field>
+  <field name="model">${1:model}</field>
+  <field name="arch" type="xml">
+    <tree string="${2:Label}">
+      <field name="${3:name}"/>
+    </tree>
+  </field>
+</record>
+
+<record id="view_${1/\./_/g}_form" model="ir.ui.view">
+  <field name="name">$1.form</field>
+  <field name="model">$1</field>
+  <field name="arch" type="xml">
+    <form string="$2">
+      <sheet string="$2">
+        <group>
+          <field name="$3"/>
+        </group>
+      </sheet>
+    </form>
+  </field>
+</record>
+
+<record id="view_${1/\./_/g}_search" model="ir.ui.view">
+  <field name="name">$1.search</field>
+  <field name="model">$1</field>
+  <field name="arch" type="xml">
+    <search string="$2">
+      <field name="$3"/>
+    </search>
+  </field>
+</record>
+
+<record model="ir.actions.act_window" id="action_${1/\./_/g}_view">
+  <field name="name">$2</field>
+  <field name="type">ir.actions.act_window</field>
+  <field name="res_model">$1</field>
+  <field name="view_type">form</field>
+  <field name="view_mode">tree,form</field>
+  <field name="search_view_id" ref="view_${1/\./_/g}_search"/>
+</record>
+
+<menuitem id="menu_${1/\./_/g}"
+  parent="${4:module.xmlid}"
+  sequence="20"
+  action="action_${1/\./_/g}_view"/>
+endsnippet
+snippet view "form (inherit)" b
+<record id="view_${1/\./_/g}_form" model="ir.ui.view">
+  <field name="name">$1.form</field>
+  <field name="model">${1:model}</field>
+  <field name="inherit_id" ref="${2:xmlid}"/>
+  <field name="arch" type="xml">
+    <xpath expr="${3:expr}" position="${4:position}">
+      $0
+    </xpath>
+  </field>
+</record>
+endsnippet
