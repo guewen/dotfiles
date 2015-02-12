@@ -13,6 +13,7 @@ antigen bundle command-not-found
 antigen bundle tmuxinator
 antigen bundle python
 antigen bundle vagrant
+antigen bundle docker
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
