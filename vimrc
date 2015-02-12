@@ -58,6 +58,8 @@ Plugin 'hdima/python-syntax'
 Plugin 'mitechie/pyflakes-pathogen'
 " open a selection in a split window
 Plugin 'chrisbra/NrrwRgn'
+" Rust
+Bundle 'wting/rust.vim'
 
 filetype plugin indent on     " required!
 
