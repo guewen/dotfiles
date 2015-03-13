@@ -443,5 +443,7 @@ endfunction
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " }}}
 
+" use 'translate-shell' to show google translations (with shift-k)
+set keywordprg=trans\ :en
 
 " vim:foldmethod=marker:foldlevel=0
