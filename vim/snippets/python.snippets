@@ -8,9 +8,9 @@ snippet utf8
 	# -*- coding: utf-8 -*-
 snippet agpl
 	# -*- coding: utf-8 -*-
-	##############################################################################
 	#
-	#    Author: Guewen Baconnier
+	#
+	#    Authors: Guewen Baconnier
 	#    Copyright 2015 Camptocamp SA
 	#
 	#    This program is free software: you can redistribute it and/or modify
@@ -26,15 +26,13 @@ snippet agpl
 	#    You should have received a copy of the GNU Affero General Public License
 	#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 	#
-	##############################################################################
+	#
 snippet __openerp__
 	{'name': '${1:name}',
 	 'version': '${2:version}',
-	 'author': 'Camptocamp',
-	 'maintainer': 'Camptocamp',
+	 'author': 'Camptocamp,Odoo Community Association (OCA)',
 	 'license': 'AGPL-3',
 	 'category': '${3:category}',
-	 'complexity': "${4:complexity}",  # easy, normal, expert
 	 'depends': [${5:depends}],
 	 'description': """${6:description}""",
 	 'website': 'http://www.camptocamp.com',
@@ -47,6 +45,8 @@ snippet pool
 	self.pool['${1}']${2}
 snippet orm
 	from openerp.osv import orm, fields
+snippet models
+	from openerp import models, fields
 snippet Model
 	class ${1:name}(orm.Model):
 	    _inherit = '${2:model}'
