@@ -43,8 +43,8 @@ Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/DrawIt'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
-" Powerline
-Bundle 'Lokaltog/powerline'
+" Airline, instead of powerline
+Bundle 'bling/vim-airline'
 " tags for javascript: https://github.com/majutsushi/tagbar/wiki#javascript
 Bundle 'marijnh/tern_for_vim'
 " autocomplete
@@ -291,15 +291,6 @@ let g:CommandTMatchWindowAtTop=1
 set shortmess=atI
 
 
-" display fancy symbols in status bar with vim-powerline
-" let g:Powerline_symbols = 'fancy'
-" Powerline colorscheme optimized for Solarized
-" let g:Powerline_colorscheme = 'skwp'
-
-" add a segment in Powerline status bar which display a marker
-" when current buffer has trailing whitespaces
-" call Pl#Theme#InsertSegment('ws_marker', 'after', 'lineinfo')
-
 " Syntastic {{{ 
 " Syntax checker for python (flake8, pyflakes, pylint)
 let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
@@ -400,9 +391,10 @@ endif
 set modelines=1  " interpret the modelines at the bottom of the files
 " }}}
 
-" Powerline {{{
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" Airline {{{
+let g:airline_powerline_fonts = 1 " use the powerline symbols in airline
 " }}}
+
 
 " YouCompleteMe {{{
 let g:ycm_autoclose_preview_window_after_completion=1
