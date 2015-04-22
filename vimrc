@@ -4,7 +4,6 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-
 " Vundle {{{
 
 " required for vundle
@@ -65,27 +64,23 @@ filetype plugin indent on     " required!
 
 " }}}
 
+" Editor Options {{{
+"
+" keep 50 lines of command line history
+set history=50
+" display incomplete commands
+set showcmd
+
+" Always display the status line
+set laststatus=2
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
+" show the cursor position all the time
+set ruler
 
-set nobackup
-set nowritebackup
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
-
-" Uncomment below to disable 'swap files' (eg. .myfile.txt.swp) from being
-" created
-" set noswapfile
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" This is an alternative that also works in block mode, but the deleted
-" text is lost and it only works for putting the current register.
-"vnoremap p "_dp
+" Switch wrap off for everything
+set nowrap
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -94,8 +89,71 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   set hlsearch
 endif
 
-" Switch wrap off for everything
-set nowrap
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+
+" Numbers
+set number
+set numberwidth=5
+
+" Tags
+set tags=./tags,tags
+
+" no sound bell
+set visualbell
+
+" Stifle many interruptive prompts
+set shortmess=atI
+
+" highlight the current line when the current mode is Insert
+autocmd InsertEnter,InsertLeave * set cul!
+
+" interpret the modelines at the bottom of the files
+set modelines=1
+
+" The highlighting starts by default 50 lines above the cursor,
+" in some files, it is not enough, so look 300 lines above (may be slower)
+
+syntax sync minlines=300
+
+" }}}
+
+" Completion {{{
+" Tab completion options
+" (only complete to the longest unambiguous match, and show a menu)
+set completeopt=longest,menu,preview
+set wildmode=list:longest,list:full
+set complete=.,t
+" }}}
+
+" Tabs {{{
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" }}}
+
+" Searching {{{
+" do incremental searching
+set incsearch
+
+" case only matters with mixed case expressions
+set ignorecase
+set smartcase
+
+" ignore files
+set wildignore+=*.po,*.pot,*.pyc
+
+" Use Ack instead of Grep when available
+if executable("ack-grep")
+  set grepprg=ack-grep\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
+endif
+" }}}
+
+" Backup / Tempfiles options {{{
+set backupdir=/tmp
+set directory=/tmp
+" }}}
 
 " autocmd {{{
 " Only do this part when compiled with support for autocommands.
@@ -108,36 +166,28 @@ if has("autocmd")
 
   " Set File type to 'text' for files ending in .txt
   autocmd BufNewFile,BufRead *.txt setfiletype text
+  " Read .haml as haml
+  autocmd BufNewFile,BufRead *.haml setfiletype haml
+  " Read .rml as xml
+  autocmd BufNewFile,BufRead *.rml setfiletype xml
 
   " Enable soft-wrapping for text files
   autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
   " Activate spell checking for text files
   autocmd FileType text,markdown,html,xhtml,eruby set spell
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  " autocmd BufReadPost *
-  "   \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  "   \   exe "normal g`\"" |
-  "   \ endif
-  "
-  "   Commented out: take the habit to use '" when opening a file to reach
-  "   the last position
-
+  autocmd FileType text setlocal wrap
   autocmd FileType python set colorcolumn=80
-  augroup END
+
+  " tabs for ruby
+  autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
 
 else
 
-  set autoindent		" always set autoindenting on
+  " always set autoindenting on
+  set autoindent
 
 endif " has("autocmd")
 " }}}
@@ -148,7 +198,7 @@ if has("folding")
   set foldmethod=indent     " fold based on indent level
   set foldlevelstart=10     " open most folds by default
   set foldnestmax=10        " 10 nested fold max
-  set foldcolumn=0
+  set foldcolumn=1
   " space open/closes folds
   nnoremap <space> za
   set foldtext=strpart(getline(v:foldstart),0,50).'\ ...\ '.substitute(getline(v:foldend),'^[\ #]*','','g').'\ '
@@ -160,21 +210,12 @@ if has("folding")
 endif
 " }}}
 
-" Tabs {{{
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" }}}
+" Mappings {{{
 
-" Always display the status line
-set laststatus=2
-
-" \ is the leader character
+" \ is the leader character by default but is not convenient with dvorak
 let mapleader = ","
 
-" Hide search highlighting
-map <Leader>h :set invhls <CR>
+" Keys {{{
 " bind C-l to :nohl in order to mute
 " the highlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -188,132 +229,42 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 " Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
+" In command mode
 cmap <C-O> <C-R>=expand("%:p:h") . "/" <CR>
 
 " Duplicate a selection
 " Visual mode: D
 vmap D y'>p
 
-" Press Shift+P while in visual mode to replace the selection without
-" overwriting the default register
-vmap P p :call setreg('"', getreg('0')) <CR>
-
-" For Haml
-au! BufRead,BufNewFile *.haml         setfiletype haml
-
-" For rml
-au! BufRead,BufNewFile *.rml set ft=xml
-
 " Press ^F from insert mode to insert the current file name
 imap <C-F> <C-R>=expand("%")<CR>
 
+" C-L in insert mode write ' => '
 imap <C-L> <Space>=><Space>
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
-
-" Local config
-if filereadable(".vimrc.local")
-  source .vimrc.local
-endif
-
-" Use Ack instead of Grep when available
-if executable("ack-grep")
-  set grepprg=ack-grep\ -H\ --nogroup\ --nocolor\ --ignore-dir=tmp\ --ignore-dir=coverage
-endif
-
-" 256 colors
-set t_Co=256
-
-" Color scheme
-set background=dark
-colorscheme solarized
-" highlight NonText guibg=#060606
-" highlight Folded  guibg=#0A0A0A guifg=#9090D0
-
-" Numbers
-set number
-set numberwidth=5
-
-" Tab completion options
-" (only complete to the longest unambiguous match, and show a menu)
-set completeopt=longest,menu,preview
-set wildmode=list:longest,list:full
-set complete=.,t
-
-" case only matters with mixed case expressions
-set ignorecase
-set smartcase
-
-" Tags
-set tags=./tags,tags
-
-" Open URL
-command -bar -nargs=1 OpenURL :!open <args>
-function! OpenURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
-  echo s:uri
-  if s:uri != ""
-	  exec "!open \"" . s:uri . "\""
-  else
-	  echo "No URI found in line."
-  endif
-endfunction
-map <Leader>w :call OpenURL()<CR>
-
-" allow to save as sudo with :w!!
-cmap w!! %!sudo tee > /dev/null %
-
-" no sound bell
-set visualbell
-
-" tabs for ruby
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
+" Don't use Ex mode, use Q for formatting
+map q gq
 
 " keep selection when indent / unindent
 vnoremap < <gv
 vnoremap > >gv
-
-" ignore files
-set wildignore+=*.po,*.pot,*.pyc
 
 " & is used to replay a susbstitution but does not
 " keep the flags. && keeps them, so rebind && to &
 nnoremap & :&&<Enter>
 xnoremap & :&&<Enter>
 
-" CommantT configuration
-let g:CommandTMaxFiles=20000
-let g:CommandTMatchWindowAtTop=1
-
-" Stifle many interruptive prompts
-set shortmess=atI
-
-
-" Syntastic {{{ 
-" Syntax checker for python (flake8, pyflakes, pylint)
-let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
+" shortcut to delete in the black hole register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+" shortcut to paste but keeping the current register
+vnoremap <leader>p "_dP
+" Press Shift+P while in visual mode to replace the selection without
+" overwriting the default register
+vmap P p :call setreg('"', getreg('0')) <CR>
 " }}}
 
-
-" hidden files in Netrw
-let g:netrw_list_hide= '.*\.pyc$'
-
-
-" ctrlp options
-let g:ctrlp_extensions = ['tag', 'buffertag', 'mixed']
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_max_height = 20
-let g:ctrlp_match_window_bottom = 0
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_files = 0
-let g:ctrlp_working_path_mode = 0
-
-" the gundo preview is below the current window
-let g:gundo_preview_bottom = 1
-
-" F keys shortcuts {{{
+" F keys {{{
 
 " No Help, please
 nmap <F1> <Esc>
@@ -341,8 +292,67 @@ map<F12> <ESC>:set wrap!<CR>
 
 " }}}
 
-" highlight the current line when the current mode is Insert
-autocmd InsertEnter,InsertLeave * set cul!
+" Commands {{{
+" allow to save as sudo with :w!!
+cmap w!! %!sudo tee > /dev/null %
+
+" allow :W for :write
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+" }}}
+
+" Open URL (Leader-w) {{{
+command -bar -nargs=1 OpenURL :!open <args>
+function! OpenURL()
+  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;:]*')
+  echo s:uri
+  if s:uri != ""
+	  exec "!open \"" . s:uri . "\""
+  else
+	  echo "No URI found in line."
+  endif
+endfunction
+map <Leader>w :call OpenURL()<CR>
+" }}}
+" }}}
+
+" Themes {{{
+
+" 256 colors
+set t_Co=256
+
+" Color scheme
+set background=dark
+colorscheme solarized
+
+" }}}
+
+" Plugins {{{
+
+" Syntastic {{{
+" Syntax checker for python (flake8, pyflakes, pylint)
+let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
+" }}}
+
+" Netrw {{{
+" hidden files in Netrw
+let g:netrw_list_hide= '.*\.pyc$'
+" }}}
+
+" CtrlP {{{
+" ctrlp options
+let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_max_height = 20
+let g:ctrlp_match_window_bottom = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 0
+" }}}
+
+" Gundo {{{
+" the gundo preview is below the current window
+let g:gundo_preview_bottom = 1
+" }}}
 
 " python-mode {{{
 let g:pymode_lint_checker = "pylint,pep8,mccabe,pep257"
@@ -357,44 +367,9 @@ let g:pymode_lint_on_fly = 1
 
 " }}}
 
-" shortcut to delete in the black hole register
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-" shortcut to paste but keeping the current register
-vnoremap <leader>p "_dP
-
-" allow :W for :write
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-
-" Undo {{{
-
-set undodir=~/.vim/undodir
-set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-
-" }}}
-
-
-" Tmux {{{
-" allows cursor change in tmux mode
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-" }}}
-
-" Misc {{{
-set modelines=1  " interpret the modelines at the bottom of the files
-" }}}
-
 " Airline {{{
 let g:airline_powerline_fonts = 1 " use the powerline symbols in airline
 " }}}
-
 
 " YouCompleteMe {{{
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -435,7 +410,33 @@ endfunction
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " }}}
 
-" use 'translate-shell' to show google translations (with shift-k)
-set keywordprg=trans\ :en
+" }}}
+
+" Undo {{{
+
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+" }}}
+
+" Tmux {{{
+" allows cursor change in tmux mode
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" }}}
+
+" Load local config {{{
+" Local config
+if filereadable(".vimrc.local")
+  source .vimrc.local
+endif
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
