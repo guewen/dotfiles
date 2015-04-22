@@ -347,6 +347,14 @@ let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_files = 0
 let g:ctrlp_working_path_mode = 0
+" Use the fastest way to find the files
+if executable('ag')
+    let s:ctrlp_user_command = 'ag %s --nocolor -l -g ""'
+elseif executable('ack-grep')
+    let s:ctrlp_user_command = 'ack-grep %s --nocolor -f'
+else
+    let s:ctrlp_user_command = 'find %s -type f'
+endif
 " }}}
 
 " Gundo {{{
