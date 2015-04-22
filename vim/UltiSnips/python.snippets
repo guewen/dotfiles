@@ -1,0 +1,134 @@
+snippet pdb
+import pdb; pdb.set_trace()
+endsnippet
+snippet vpdb
+import vimpdb; vimpdb.set_trace()
+endsnippet
+snippet pudb
+import pudb; pudb.set_trace()
+endsnippet
+snippet utf8 "-*- coding: utf-8 -*-" b
+# -*- coding: utf-8 -*-
+endsnippet
+snippet agpl "AGPL3 header" b
+# -*- coding: utf-8 -*-
+#
+#
+#    Authors: `!v g:snips_author`
+#    Copyright `!v strftime("%Y")` `!v g:snips_full_company`
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#
+endsnippet
+snippet __openerp__ "Manifest" b
+{'name': '${1:name}',
+ 'version': '${2:version}',
+ 'author': '`!v g:snips_company`,Odoo Community Association (OCA)',
+ 'license': 'AGPL-3',
+ 'category': '${3:category}',
+ 'depends': [${5:depends}],
+ 'description': """${6:description}""",
+ 'website': 'http://`!v g:snips_company_website`',
+ 'data': [],
+ 'test': [],
+ 'installable': True,
+ 'auto_install': False,
+}
+endsnippet
+snippet pool
+self.pool['${1}']${2}
+endsnippet
+snippet orm "orm, fields" b
+from openerp.osv import orm, fields
+endsnippet
+snippet orm "orm" b
+from openerp.osv import orm
+endsnippet
+snippet models "models" b
+from openerp import models
+endsnippet
+snippet models "models, fields" b
+from openerp import models, fields
+endsnippet
+snippet models "models, fields, api" b
+from openerp import models, fields, api
+endsnippet
+snippet models "models, fields, api, exceptions, _" b
+from openerp import models, fields, api, exceptions, _
+endsnippet
+snippet Model "Model" b
+class ${1:name}(orm.Model):
+    ${2:_inherit} = '${3:model}'
+
+    ${4}
+endsnippet
+snippet Model "TransientModel" b
+class ${1:name}(orm.TransientModel):
+    ${2:_inherit} = '${3:model}'
+
+    ${4}
+endsnippet
+snippet Model "AbstractModel" b
+class ${1:name}(orm.AbstractModel):
+    ${2:_inherit} = '${3:model}'
+
+    ${4}
+endsnippet
+snippet Boolean "" b
+${1:name} = fields.Boolean(
+    string='{2}',
+    ${3}
+    help=${3:help},
+)
+endsnippet
+snippet Char "" b
+${1:name} = fields.Char(
+    string='${2}',
+    ${3}
+)
+endsnippet
+snippet Date "" b
+${1:name} = fields.Date(
+    string='${2}',
+    ${3}
+)
+endsnippet
+snippet Datetime "" b
+${1:name} = fields.Datetime(
+    string='${2}',
+    ${3}
+)
+endsnippet
+snippet Many2one "" b
+${1:name} = fields.Many2one(
+    comodel_name=${2:model_name},
+    string='${2}',
+    ${3}
+)
+endsnippet
+snippet One2many "" b
+${1:name} = fields.One2many(
+    comodel_name=${2:model_name},
+    string='${3}',
+    ${4}
+)
+endsnippet
+snippet Many2many "" b
+${1:name} = fields.Many2many(
+    comodel_name=${2:model_name},
+    string='${3}',
+    ${4}
+)
+endsnippet

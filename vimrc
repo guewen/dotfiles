@@ -410,6 +410,14 @@ endfunction
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " }}}
 
+" UltiSnips {{{
+let g:snips_author = 'Guewen Baconnier'
+let g:snips_email = 'guewen.baconnier@camptocamp.com'
+let g:snips_company = 'Camptocamp'
+let g:snips_full_company = 'Camptocamp SA'
+let g:snips_company_website = 'www.camptocamp.com'
+" }}}
+
 " }}}
 
 " Undo {{{
