@@ -44,13 +44,12 @@ Debian packages:
   xsel
   ack-grep
 
-
 Standalone installations
 
   rvm (https://rvm.io/rvm/install/)
   oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
   hub (http://hub.github.com)
-
+  neovim (https://github.com/neovim/neovim)
 
 Python modules:
 

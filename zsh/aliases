@@ -37,6 +37,9 @@ alias tx='tmuxinator'
 # commands starting with % for pasting from web
 alias %=' '
 
+alias vim=nvim
+alias vi=nvim
+
 # hub (git wrapper for github)
 unalias g
 alias g=hub
