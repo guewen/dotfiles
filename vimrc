@@ -243,7 +243,7 @@ imap <C-F> <C-R>=expand("%")<CR>
 imap <C-L> <Space>=><Space>
 
 " Don't use Ex mode, use Q for formatting
-map q gq
+map Q gq
 
 " keep selection when indent / unindent
 vnoremap < <gv
