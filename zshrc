@@ -63,6 +63,10 @@ source ~/.zsh/scripts
 source ~/.zsh/tmux
 source ~/.zsh/bindkey
 
+# Completions
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
+
 
 # Customize to your needs...
 export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:$HOME/.local/bin
