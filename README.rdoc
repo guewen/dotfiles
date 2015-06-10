@@ -55,7 +55,6 @@ Python modules:
 
   pip
   virtualenv
-  virtualenvwrapper
   fancycompleter
 
 And Ruby gems:

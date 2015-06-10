@@ -62,7 +62,6 @@ source ~/.zsh/options
 source ~/.zsh/scripts
 source ~/.zsh/tmux
 source ~/.zsh/bindkey
-source ~/.zsh/virtualenvwrapper
 
 
 # Customize to your needs...
