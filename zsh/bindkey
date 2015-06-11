@@ -9,3 +9,4 @@ bindkey '^[[4~' end-of-line
 
 # insert a pound (#) at beginning of line (ALT-e)
 bindkey '\e#' pound-insert
+bindkey -e

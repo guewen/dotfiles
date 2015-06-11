@@ -29,7 +29,7 @@ antigen apply
 
 DEFAULT_USER="gbaconnier"
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 if [[ "$TERM" != "screen-256color" ]] then
     export TERM="xterm-256color"
