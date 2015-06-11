@@ -23,12 +23,12 @@ These are config files to set up a system the way I like it.
 == Environment
 
 I am running on GNU/Linux and my dotfiles includes:
- - zsh (with oh-my-zsh)
+ - zsh
  - vim
  - tmux
  - ruby
  - python
- - Xresource config for urxvt-unicode
+ - Xresource config for urxvt-unicode and rofi
 
 === Dependencies:
 
@@ -43,6 +43,7 @@ Debian packages:
   exuberant-ctags
   xsel
   ack-grep
+  i3
 
 Standalone installations
 
@@ -50,6 +51,8 @@ Standalone installations
   oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
   hub (http://hub.github.com)
   neovim (https://github.com/neovim/neovim)
+  rofi (https://davedavenport.github.io/rofi/)
+  volnoti (https://github.com/davidbrazdil/volnoti)
 
 Python modules:
 
