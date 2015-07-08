@@ -13,9 +13,9 @@ setopt hist_verify              # show before executing history commands
 setopt inc_append_history       # add commands as they are typed, don't wait until shell exit 
 setopt share_history            # share hist between sessions
 setopt bang_hist                # !keyword
-setopt share_history            # share hist between sessions
-setopt interactivecomments  # allow to put a pound at beginning of line to comment a line
+setopt interactivecomments      # allow to put a pound at beginning of line to comment a line
 export HISTORY=5000
+export HISTSIZE=5200
 export SAVEHIST=5000
 
 # Completions
