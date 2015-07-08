@@ -4,3 +4,6 @@
 [submodule "antigen"]
 	path = antigen
 	url = https://github.com/zsh-users/antigen.git
+[submodule "urxvt/ext/font-size"]
+	path = urxvt/ext/font-size
+	url = git@github.com:majutsushi/urxvt-font-size.git
