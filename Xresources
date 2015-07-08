@@ -66,7 +66,7 @@ URxvt*color15:                        #fdf6e3
 rofi.modi:                           run,window,ssh
 rofi.opacity:                        90
 rofi.width:                          100
-rofi.lines:                          5
+rofi.lines:                          10
 rofi.columns:                        1
 rofi.font:                           DejaVu Sans Mono 8
 rofi.fg:                             #1aa
@@ -87,7 +87,7 @@ rofi.hlbg-urgent:                    #DC322F
 rofi.bgalt:                          #333
 rofi.hlfg:                           #333
 rofi.hlbg:                           #1aa
-rofi.bc:                             #1aa
+rofi.bc:                             #333
 rofi.bw:                             2
 rofi.location:                       1
 rofi.padding:                        0
