@@ -11,6 +11,8 @@
 [merge]
   tool = vimdiff
   conflictstyle = diff3
+[rebase]
+  autosquash = true
 [mergetool]
   prompt = false
 [core]
@@ -24,3 +26,5 @@
 [github]
 	user = <%= print("GitHub Username: "); STDOUT.flush; STDIN.gets.chomp %>
 	token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>
+[push]
+	default = simple
