@@ -47,8 +47,6 @@ export PATH=$PATH:$HOME/.rvm/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/s
 
 export PYTHONSTARTUP=~/.pythonrc.py
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 # load config files for tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
