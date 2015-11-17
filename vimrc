@@ -38,8 +38,9 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
-Bundle 'sjl/gundo.vim'
 Bundle 'vim-scripts/DrawIt'
+" Interactive undo (gundo's fork working with neovim)
+Bundle 'simnalamburt/vim-mundo'
 " Editing CSV
 Bundle 'chrisbra/csv.vim'
 " Airline, instead of powerline
@@ -59,6 +60,8 @@ Plugin 'mitechie/pyflakes-pathogen'
 Plugin 'chrisbra/NrrwRgn'
 " Rust
 Bundle 'wting/rust.vim'
+" better python folding
+Bundle 'tmhedberg/SimpylFold'
 
 filetype plugin indent on     " required!
 
@@ -115,6 +118,9 @@ set modelines=1
 " in some files, it is not enough, so look 300 lines above (may be slower)
 
 syntax sync minlines=300
+
+" Default option for mouse in neovim is 'a' (enabled). Don't wanna that
+set mouse=r
 
 " }}}
 
@@ -195,7 +201,7 @@ endif " has("autocmd")
 " Folding {{{
 if has("folding")
   set foldenable            " enable folding
-  set foldmethod=indent     " fold based on indent level
+  " set foldmethod=indent     " fold based on indent level
   set foldlevelstart=10     " open most folds by default
   set foldnestmax=10        " 10 nested fold max
   set foldcolumn=1
@@ -205,8 +211,13 @@ if has("folding")
 
   if has("autocmd")
     autocmd FileType c,cpp,d,perl,java,cs set foldmethod=syntax
-    autocmd FileType python,xml set foldmethod=indent
+    autocmd FileType xml set foldmethod=indent
   endif
+
+  " preview folded classes and functions docstrings
+  let g:SimpylFold_docstring_preview = 1
+  " do not fold docstrings
+  let g:SimpylFold_fold_docstring = 0
 endif
 " }}}
 
