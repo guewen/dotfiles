@@ -26,7 +26,8 @@ Bundle "tomtom/tlib_vim"
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-cucumber'
-Bundle 'scrooloose/syntastic'
+" same as syntastic but async with neovim
+Bundle 'benekastah/neomake'
 Bundle 'godlygeek/tabular'
 Bundle 'benmills/vimux'
 Bundle 'actionshrimp/vim-xpath'
@@ -54,7 +55,7 @@ Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Python Color Syntax
 Plugin 'hdima/python-syntax'
-" Syntax checker on the fly (complement Syntastic/Flake8)
+" Syntax checker on the fly (complement neomake/Flake8)
 Plugin 'mitechie/pyflakes-pathogen'
 " open a selection in a split window
 Plugin 'chrisbra/NrrwRgn'
@@ -62,6 +63,10 @@ Plugin 'chrisbra/NrrwRgn'
 Bundle 'wting/rust.vim'
 " better python folding
 Bundle 'tmhedberg/SimpylFold'
+" Javascript better syntax
+Plugin 'jelera/vim-javascript-syntax'
+" Javascript library syntax
+Plugin 'othree/javascript-libraries-syntax.vim'
 
 filetype plugin indent on     " required!
 
@@ -189,6 +194,9 @@ if has("autocmd")
 
   " tabs for ruby
   autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
+
+  " Check syntax on every save
+  autocmd! BufWritePost * Neomake
 
 else
 
@@ -339,9 +347,10 @@ colorscheme solarized
 
 " Plugins {{{
 
-" Syntastic {{{
+" Neomake {{{
 " Syntax checker for python (flake8, pyflakes, pylint)
-let g:syntastic_python_checkers = ['python', 'flake8', 'pylint']
+let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
+let g:neomake_javascript_enabled_makers = ['eslint']
 " }}}
 
 " Netrw {{{
@@ -435,6 +444,10 @@ let g:snips_email = 'guewen.baconnier@camptocamp.com'
 let g:snips_company = 'Camptocamp'
 let g:snips_full_company = 'Camptocamp SA'
 let g:snips_company_website = 'www.camptocamp.com'
+" }}}
+
+" Javascript Library Syntax {{{
+let g:used_javascript_libs = 'underscore,jquery,angularjs'
 " }}}
 
 " }}}
