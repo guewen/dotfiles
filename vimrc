@@ -49,8 +49,11 @@ Bundle 'bling/vim-airline'
 " tags for javascript: https://github.com/majutsushi/tagbar/wiki#javascript
 Bundle 'marijnh/tern_for_vim'
 " autocomplete
-Bundle 'Valloric/YouCompleteMe'
-" snippets (compatible with YouCompleteMe)
+Bundle 'Shougo/deoplete.nvim'
+Bundle 'zchee/deoplete-jedi'
+" python formatter
+Bundle 'drinksober/nvim-yapf-formater'
+" snippets
 Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Python Color Syntax
@@ -64,12 +67,27 @@ Bundle 'wting/rust.vim'
 " better python folding
 Bundle 'tmhedberg/SimpylFold'
 " Javascript better syntax
-Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'jelera/vim-javascript-syntax'
 " Javascript library syntax
 Plugin 'othree/javascript-libraries-syntax.vim'
+" Manipulate rst tables
+Plugin 'nvie/vim-rst-tables'
+" javascript with es6
+Plugin 'othree/yajs.vim'
+" Postgresql in vim
+Plugin 'vim-scripts/dbext.vim'
+Plugin 'vim-scripts/SQLComplete.vim'
+Plugin 'rdolgushin/groovy.vim'
 
 filetype plugin indent on     " required!
 
+" }}}
+
+" Python neovim / virtualenv {{{
+" use virtualenvs for the neovim python egg, so when I don't need to install
+" neovim in every virtualenv I use
+let g:python_host_prog = '/home/gbaconnier/.dotfiles/vim/venv2/bin/python'
+let g:python3_host_prog = '/home/gbaconnier/.dotfiles/vim/venv3/bin/python'
 " }}}
 
 " Editor Options {{{
@@ -181,6 +199,8 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.haml setfiletype haml
   " Read .rml as xml
   autocmd BufNewFile,BufRead *.rml setfiletype xml
+  " Jenkinsfile is groovy
+  autocmd BufNewFile,BufRead Jenkinsfile setfiletype groovy
 
   " Enable soft-wrapping for text files
   autocmd FileType text,markdown,html,xhtml,eruby setlocal wrap linebreak nolist
@@ -296,7 +316,7 @@ map <silent> <F4> "<Esc>:silent setlocal spell! spelllang=fr<CR>"
 :nnoremap <F5> :!ctags -R<CR>
 
 " display gundo graph
-nnoremap <F6> :GundoToggle<CR>
+nnoremap <F6> :MundoToggle<CR>
 
 " save a vim session
 :nnoremap <F8> :wa<Bar>exe "mksession! " . v:this_session<CR>
@@ -377,9 +397,9 @@ else
 endif
 " }}}
 
-" Gundo {{{
+" Mundo {{{
 " the gundo preview is below the current window
-let g:gundo_preview_bottom = 1
+let g:mundo_preview_bottom = 1
 " }}}
 
 " python-mode {{{
@@ -399,43 +419,30 @@ let g:pymode_lint_on_fly = 1
 let g:airline_powerline_fonts = 1 " use the powerline symbols in airline
 " }}}
 
-" YouCompleteMe {{{
-let g:ycm_autoclose_preview_window_after_completion=1
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-let g:UltiSnipsExpandTrigger       ="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" deoplete {{{
+"
+"" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" auto-close the top stratch window
+"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" omnifuncs
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
 
-" Enable tabbing through list of results
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
 
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-
-" Set <space> as primary trigger
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 " }}}
 
 " UltiSnips {{{
@@ -472,11 +479,24 @@ else
 endif
 " }}}
 
+" DBext {{{
+" Each profile has the form:
+" g:dbext_default_profile_'profilename' = 'var=value:var=value:...'
+let g:dbext_default_profile_psql = 'type=PGSQL:host=localhost:port=5442:dbname=odoodb:user=odoo'
+let g:dbext_default_profile = 'psql'
+"}}}
+
 " Load local config {{{
 " Local config
 if filereadable(".vimrc.local")
   source .vimrc.local
 endif
+" }}}
+"
+" Custom functions {{{
+function HasteUpload() range
+    echo system('echo '.shellescape(join(getline(a:firstline, a:lastline), "\n")).'| haste | xsel -ib')
+endfunction
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

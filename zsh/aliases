@@ -45,3 +45,10 @@ unalias g
 alias g=hub
 
 unalias ls
+
+alias doco='docker-compose'
+alias docu='docker-compose up -d'
+alias docl='docker-compose logs'
+alias bro='chromium-browser --incognito $(docker-compose port odoo 8069)'
+
+alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'

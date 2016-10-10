@@ -20,17 +20,17 @@
 
 -- http://opensourcedbms.com/dbms/psqlrc-psql-startup-file-for-postgres/
 
-\echo '\t\t\t:settings\t-- Server Settings'
-\echo '\t\t\t:conninfo\t-- Server connections'
-\echo '\t\t\t:activity\t-- Server activity'
-\echo '\t\t\t:locks\t\t-- Lock info'
-\echo '\t\t\t:waits\t\t-- Waiting queries'
-\echo '\t\t\t:dbsize\t\t-- Database Size'
-\echo '\t\t\t:tablesize\t-- Tables Size'
-\echo '\t\t\t:show_slow_queries\t-- Slow Queries'
-\echo '\t\t\t:menu\t\t-- Help Menu'
-\echo '\t\t\t\\h\t\t-- Help with SQL commands'
-\echo '\t\t\t\\?\t\t-- Help with psql commands\n'
+-- \echo '\t\t\t:settings\t-- Server Settings'
+-- \echo '\t\t\t:conninfo\t-- Server connections'
+-- \echo '\t\t\t:activity\t-- Server activity'
+-- \echo '\t\t\t:locks\t\t-- Lock info'
+-- \echo '\t\t\t:waits\t\t-- Waiting queries'
+-- \echo '\t\t\t:dbsize\t\t-- Database Size'
+-- \echo '\t\t\t:tablesize\t-- Tables Size'
+-- \echo '\t\t\t:show_slow_queries\t-- Slow Queries'
+-- \echo '\t\t\t:menu\t\t-- Help Menu'
+-- \echo '\t\t\t\\h\t\t-- Help with SQL commands'
+-- \echo '\t\t\t\\?\t\t-- Help with psql commands\n'
 
 \set menu '\\i ~/.psqlrc'
 

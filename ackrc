@@ -4,3 +4,4 @@
 --type-set=feature=.feature
 --type-set=rst=.rst
 --type-set=yaml=.yml
+--type-set=po=.po,.pot
