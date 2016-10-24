@@ -11,9 +11,6 @@ These are config files to set up a system the way I like it.
     git submodule update
     rake install
 
-  Patch the font used in terminal for Powerline :
-  https://github.com/Lokaltog/vim-powerline/tree/develop/fontpatcher
-
   Launch vim, run :BundleInstall (or vim +BundleInstall +qall for CLI lovers)
 
   If you use urxvt-unicode (the build which supports 256 colors), you have to run:
@@ -28,15 +25,14 @@ I am running on GNU/Linux and my dotfiles includes:
  - tmux
  - ruby
  - python
- - Xresource config for urxvt-unicode and rofi
+ - Xresource config for rxvt-unicode-256color and rofi
 
 === Dependencies:
 
 Debian packages:
 
-  urxvt-unicode (with 256 colors support)
+  rxvt-unicode-256color
   zsh
-  vim-gnome or vim-gtk (to have the X11 support)
   tmux
   ruby
   python
@@ -47,8 +43,6 @@ Debian packages:
 
 Standalone installations
 
-  rvm (https://rvm.io/rvm/install/)
-  oh-my-zsh (https://github.com/robbyrussell/oh-my-zsh)
   hub (http://hub.github.com)
   neovim (https://github.com/neovim/neovim)
   rofi (https://davedavenport.github.io/rofi/)
@@ -57,14 +51,13 @@ Standalone installations
 Python modules:
 
   pip
+  py3status
   virtualenv
   fancycompleter
 
 And Ruby gems:
 
   tmuxinator
-  wirble
-  looksee
 
 
 == Features
