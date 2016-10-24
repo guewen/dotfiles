@@ -145,6 +145,9 @@ syntax sync minlines=300
 " Default option for mouse in neovim is 'a' (enabled). Don't wanna that
 set mouse=r
 
+" display a bar instead of a block in insert mode
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 " }}}
 
 " Completion {{{
