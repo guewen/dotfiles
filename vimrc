@@ -77,6 +77,7 @@ Plugin 'vim-scripts/dbext.vim'
 Plugin 'vim-scripts/SQLComplete.vim'
 Plugin 'rdolgushin/groovy.vim'
 
+Plugin 'mileszs/ack.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required!
