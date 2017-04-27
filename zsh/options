@@ -17,6 +17,7 @@ setopt interactivecomments      # allow to put a pound at beginning of line to c
 export HISTORY=5000
 export HISTSIZE=5200
 export SAVEHIST=5000
+setopt HIST_IGNORE_SPACE
 
 # Completions
 
@@ -50,6 +51,9 @@ compdef _gnu_generic gdb
 
 fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit && compinit
+
+autoload -z edit-command-line
+zle -N edit-command-line
 
 autoload -U promptinit
 promptinit
