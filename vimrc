@@ -58,8 +58,6 @@ Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Python Color Syntax
 Plugin 'hdima/python-syntax'
-" Syntax checker on the fly (complement neomake/Flake8)
-Plugin 'mitechie/pyflakes-pathogen'
 " open a selection in a split window
 Plugin 'chrisbra/NrrwRgn'
 " Rust
@@ -78,6 +76,8 @@ Plugin 'othree/yajs.vim'
 Plugin 'vim-scripts/dbext.vim'
 Plugin 'vim-scripts/SQLComplete.vim'
 Plugin 'rdolgushin/groovy.vim'
+
+Plugin 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required!
 
@@ -258,9 +258,9 @@ endif
 let mapleader = ","
 
 " Keys {{{
-" bind C-l to :nohl in order to mute
+" :nohl in order to mute
 " the highlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+map <Leader>l :e <C-u>nohlsearch<CR><C-l>
 
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
@@ -304,6 +304,30 @@ vnoremap <leader>p "_dP
 " Press Shift+P while in visual mode to replace the selection without
 " overwriting the default register
 vmap P p :call setreg('"', getreg('0')) <CR>
+
+" https://blog.bugsnag.com/tmux-and-vim/
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Zoom the tmux runner pane
+map <Leader>vz :VimuxZoomRunner<CR>
+
+" Press i to enter insert mode, and ii to exit.
+:imap ii <Esc>
+" Press i to enter insert mode, and jk to exit.
+:imap jk <Esc>
+" Press i to enter insert mode, and kj to exit.
+:imap kj <Esc>
+
+" Run docker-compose pytest for current buffer
+map <Leader>tb :DocoPytestBuffer<CR>
+" Run docker-compose pytest for current test function
+map <Leader>tt :DocoPytestFocused<CR>
 " }}}
 
 " F keys {{{
@@ -497,8 +521,59 @@ endif
 " }}}
 "
 " Custom functions {{{
-function HasteUpload() range
+function! HasteUpload() range
     echo system('echo '.shellescape(join(getline(a:firstline, a:lastline), "\n")).'| haste | xsel -ib')
+endfunction
+" }}}
+
+" Vimux Docker-compose Pytest commands {{{
+command! DocoPytestBuffer :call DocoPytestBuffer()
+command! DocoPytestFocused :call DocoPytestFocused()
+
+command! DocoGenTestDb :call DocoGenTestDb()
+command! DocoUpdateTestDb :call DocoUpdateTestDb()
+command! DocoDropTestDb :call DocoDropTestDb()
+
+function! DocoGenTestDb(addon)
+  call VimuxRunCommand('docker-compose run --rm -e DB_NAME=testdb odoo testdb-gen -i ' . a:addon)
+endfunction
+
+function! DocoUpdateTestDb(addon)
+  call VimuxRunCommand('docker-compose run --rm -e DB_NAME=testdb odoo testdb-update ' . a:addon)
+endfunction
+
+function! DocoDropTestDb()
+  call VimuxRunCommand('docker-compose run --rm -e DB_NAME=testdb odoo dropdb testdb')
+endfunction
+
+function! DocoPytestBuffer()
+  call _run_docopytest(fnamemodify(expand("%"), ":~:."))
+endfunction
+
+function! DocoPytestFocused()
+  let test_class = _python_test_search("class ")
+  let test_name = _python_test_search("def test_")
+
+  if test_class == "" || test_name == ""
+    echoerr "Couldn't find class and test name to run focused test."
+    return
+  endif
+
+  call _run_docopytest(expand("%") . "::" . test_class . "::" . test_name)
+endfunction
+
+function! _python_test_search(fragment)
+  let line_num = search(a:fragment, "bs")
+  if line_num > 0
+    ''
+    return split(split(getline(line_num), " ")[1], "(")[0]
+  else
+    return ""
+  endif
+endfunction
+
+function! _run_docopytest(test)
+  call VimuxRunCommand('docker-compose run --rm -e DB_NAME=testdb odoo pytest -s ' . a:test)
 endfunction
 " }}}
 
