@@ -317,6 +317,12 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 map <Leader>vi :VimuxInspectRunner<CR>
 " Zoom the tmux runner pane
 map <Leader>vz :VimuxZoomRunner<CR>
+" Interrupt the tmux runner pane
+map <Leader>vc :VimuxInterruptRunner<CR>
+" Scroll down the tmux runner pane
+map <Leader>vj :VimuxScrollDownInspect<CR>
+" Scroll up the tmux runner pane
+map <Leader>vk :VimuxScrollUpInspect<CR>
 
 " Press i to enter insert mode, and ii to exit.
 :imap ii <Esc>
@@ -525,6 +531,20 @@ endif
 function! HasteUpload() range
     echo system('echo '.shellescape(join(getline(a:firstline, a:lastline), "\n")).'| haste | xsel -ib')
 endfunction
+" }}}
+
+" Vimux Docker-compose Odoo commands {{{
+
+command! DocoOdoo :call DocoOdoo()
+
+function! DocoOdoo(...)
+  if a:0 > 0
+    call VimuxRunCommand('docker-compose run --rm -p 80:8069 odoo odoo --workers=0 ' . join(a:000))
+  else
+    call VimuxRunCommand('docker-compose run --rm -p 80:8069 odoo odoo --workers=0 ')
+  end
+endfunction
+
 " }}}
 
 " Vimux Docker-compose Pytest commands {{{
