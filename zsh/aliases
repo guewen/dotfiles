@@ -23,6 +23,23 @@ compdef _git gs=git-status
 alias grm="git status | grep deleted | awk '{print \$3}' | xargs git rm"
 alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
 
+alias gc='git commit -v'
+
+alias gd='git diff'
+alias gdca='git diff --cached'
+
+alias glo='git log --oneline --decorate'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glols="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat"
+alias glod="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
+alias glods="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
+alias glola="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+
+alias grbc='git rebase --continue'
+
+
 # ack
 alias ack='ack-grep'
 
@@ -41,8 +58,8 @@ alias vim=nvim
 alias vi=nvim
 
 # hub (git wrapper for github)
-unalias g
-alias g=hub
+# unalias g
+# alias g=hub
 
 unalias ls
 
@@ -52,3 +69,8 @@ alias docl='docker-compose logs'
 alias bro='chromium-browser --incognito $(docker-compose port odoo 8069)'
 
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+alias g='git'
+alias ga='git add'
+alias gc='git commit -v'
+alias glo='git log --decorate'
