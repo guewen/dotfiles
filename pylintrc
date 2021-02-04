@@ -1,89 +1,57 @@
 [MASTER]
-
-# Specify a configuration file.
-#rcfile=
-
-# Python code to execute, usually for sys.path manipulation such as
-# pygtk.require().
-# init-hook for openerp: when launched from inside server, add openerp path
-#init-hook=import os, sys, re; s = re.search('.*/src', os.getcwd()); src_path = s.group(0) if s else None; src_path and sys.path.append(src_path + "/server/openerp")
-init-hook=import os, sys, re; s = re.search('.*/(src|parts)', os.getcwd()); src_path = s.group(0) if s else None; src_path and sys.path.append(src_path + "/server")
-
-# Profiled execution.
 profile=no
-
-# Add files or directories to the blacklist. They should be base names, not
-# paths.
-ignore=CVS,.git,scenarios,Scenario,.bzr
-
-# Pickle collected data for later comparisons.
+ignore=CVS,.git,scenarios,.bzr
 persistent=yes
-
-# List of plugins (as comma separated values of python modules names) to load,
-# usually to register additional checkers.
-load-plugins=
-
 cache-size=500
 
-
 [MESSAGES CONTROL]
-
-# Enable the message, report, category or checker with the given id(s). You can
-# either give multiple identifier separated by comma (,) or put this option
-# multiple time.
-#enable=
-
-# Disable the message, report, category or checker with the given id(s). You
-# can either give multiple identifier separated by comma (,) or put this option
-# multiple time (only on the command line, not in the configuration file where
-# it should appear only once).
 disable=all
-enable=E0101,E1124,E1306,I0013,W0101,W1111,W0102
+
+# Enable message and code:
+#   anomalous-backslash-in-string - W1401
+#   assignment-from-none - W1111
+#   dangerous-default-value - W0102
+#   duplicate-key - W0109
+#   pointless-statement - W0104
+#   pointless-string-statement - W0105
+#   print-statement - E1601
+#   redundant-keyword-arg - E1124
+#   reimported - W0404
+#   relative-import - W0403
+#   return-in-init - E0101
+#   too-few-format-args - E1306
+#   unreachable - W0101
+
+enable=anomalous-backslash-in-string,
+    assignment-from-none,
+    dangerous-default-value,
+    duplicate-key,
+    missing-import-error,
+    missing-manifest-dependency,
+    pointless-statement,
+    pointless-string-statement,
+    print-statement,
+    redundant-keyword-arg,
+    reimported,
+    relative-import,
+    return-in-init,
+    too-few-format-args,
+    unreachable,
 
 [REPORTS]
-
-# Set the output format. Available formats are text, parseable, colorized, msvs
-# (visual studio) and html
-output-format=text
-
-# Include message's id in output
-include-ids=no
-
-# Put messages in a separate file for each module / package specified on the
-# command line instead of printing them on stdout. Reports (if any) will be
-# written in a file name "pylint_global.[txt|html]".
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+output-format=colorized
 files-output=no
-
-# Tells whether to display a full report or only the messages
-reports=yes
-
-# Python expression which should return a note less than 10 (10 is the highest
-# note). You have access to the variables errors warning, statement which
-# respectively contain the number of errors / warnings messages and the total
-# number of statements analyzed. This is used by the global evaluation report
-# (RP0004).
+reports=no
 evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
-
-# Add a comment according to your evaluation note. This is used by the global
-# evaluation report (RP0004).
 comment=no
 
+[FORMAT]
+indent-string='    '
 
 [SIMILARITIES]
-
-# Ignore comments when computing similarities.
 ignore-comments=yes
-
-# Ignore docstrings when computing similarities.
 ignore-docstrings=yes
 
 [MISCELLANEOUS]
-
-# List of note tags to take in consideration, separated by a comma.
-notes=FIXME,XXX,TODO
-
-[FORMAT]
-
-# String used as indentation unit. This is usually " " (4 spaces) or "\t" (1
-# tab).
-indent-string='    '
+notes=
