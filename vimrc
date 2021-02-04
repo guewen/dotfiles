@@ -26,8 +26,10 @@ Bundle "tomtom/tlib_vim"
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-cucumber'
-" same as syntastic but async with neovim
-Bundle 'benekastah/neomake'
+" PEP8 + pylint
+" Async syntax checker for NeoVim and Vim 8
+" A tool that goes snicker-snack on the bad syntax
+Bundle 'w0rp/ale'
 Bundle 'godlygeek/tabular'
 Bundle 'benmills/vimux'
 Bundle 'actionshrimp/vim-xpath'
@@ -78,7 +80,6 @@ Plugin 'vim-scripts/SQLComplete.vim'
 Plugin 'rdolgushin/groovy.vim'
 
 Plugin 'mileszs/ack.vim'
-Plugin 'christoomey/vim-tmux-navigator'
 
 filetype plugin indent on     " required!
 
@@ -218,9 +219,6 @@ if has("autocmd")
 
   " tabs for ruby
   autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 sts=2
-
-  " Check syntax on every save
-  autocmd! BufWritePost * Neomake
 
 else
 
@@ -401,12 +399,6 @@ colorscheme solarized
 
 " Plugins {{{
 
-" Neomake {{{
-" Syntax checker for python (flake8, pyflakes, pylint)
-let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
-let g:neomake_javascript_enabled_makers = ['eslint']
-" }}}
-
 " Netrw {{{
 " hidden files in Netrw
 let g:netrw_list_hide= '.*\.pyc$'
@@ -458,8 +450,8 @@ let g:airline_powerline_fonts = 1 " use the powerline symbols in airline
 "" Use deoplete.
 let g:deoplete#enable_at_startup = 1
 " auto-close the top stratch window
-"
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" "
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " omnifuncs
 augroup omnifuncs
   autocmd!
@@ -491,6 +483,10 @@ let g:snips_company_website = 'www.camptocamp.com'
 let g:used_javascript_libs = 'underscore,jquery,angularjs'
 " }}}
 
+" Javascript Library Syntax {{{
+let g:ale_sign_column_always = 1
+" }}}
+"
 " }}}
 
 " Undo {{{
