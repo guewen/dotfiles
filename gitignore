@@ -1,8 +1,8 @@
 .DS_Store
 .svn
 *~
-tags
 
+*.pyc
 # Created by http://www.gitignore.io
 
 ### vim ###
@@ -12,3 +12,5 @@ tags
 Session.vim
 .netrwhist
 *~
+
+.mypy_cache

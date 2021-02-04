@@ -5,3 +5,4 @@
 --type-set=rst=.rst
 --type-set=yaml=.yml
 --type-set=po=.po,.pot
+--ignore-dir=.mypy_cache
