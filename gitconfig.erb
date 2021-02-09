@@ -4,6 +4,8 @@
 [alias]
 	co = checkout
   ui = auto
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [color]
 	diff = auto
 	status = auto
@@ -28,3 +30,7 @@
 	token = <%= print("GitHub API Token: "); STDOUT.flush; STDIN.gets.chomp %>
 [push]
 	default = simple
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
