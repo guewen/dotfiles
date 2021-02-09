@@ -14,11 +14,11 @@ setopt inc_append_history       # add commands as they are typed, don't wait unt
 setopt share_history            # share hist between sessions
 setopt bang_hist                # !keyword
 setopt interactivecomments      # allow to put a pound at beginning of line to comment a line
-# export HISTORY=1000000000
+export HISTORY=1000000000
 export HISTSIZE=1000000000
 export SAVEHIST=$HISTFILESIZE
 setopt HIST_IGNORE_SPACE
-setopt EXTENDED_HISTORY
+# setopt EXTENDED_HISTORY
 
 # Completions
 
