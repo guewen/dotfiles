@@ -5,7 +5,8 @@ URxvt*:borderLess:                    true
 URxvt*cursorBlink:                    true
 !URxvt*font: xft:Inconsolata-dz\ for\ Powerline:pixelsize=12:antialias=true:hinting=true
 /* URxvt*font: xft:Droid\ Sans\ Mono\ for\ Powerline:style=Regular:pixelsize=11:antialias=true:hinting=true */
-URxvt*font: xft:Hack:size=8,style=Regular,xft:Symbola:size=9,style=Regular
+/* URxvt*font: xft:Hack:size=8,style=Regular,xft:Symbola:size=9,style=Regular */
+URxvt*font: xft:Source Code Pro:size=8,style=Regular,xft:Symbola:size=9,style=Regular
 URxvt*jumpScroll:                     true
 
 URxvt*scrollBar:                      false
