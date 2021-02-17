@@ -125,7 +125,7 @@
 
 [frame]
     width = 3
-    color = "#aaaaaa"
+    color = "#282828"
 
 [shortcuts]
     # shortcuts are specified as [modifier+][modifier+]...key
@@ -149,18 +149,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the '#' and following  would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#888888"
+    background = "#7c6f64"
+    foreground = "#fbf1c7"
     timeout = 10
 
 [urgency_normal]
-    background = "#285577"
-    foreground = "#ffffff"
+    background = "#3c3836"
+    foreground = "#ebdbb2"
     timeout = 10
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
+    background = "#cc241d"
+    foreground = "#ebdbb2"
     timeout = 0
 
 

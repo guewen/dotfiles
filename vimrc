@@ -25,7 +25,7 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-cucumber'
+" Bundle 'tpope/vim-cucumber'
 " PEP8 + pylint
 " Async syntax checker for NeoVim and Vim 8
 " A tool that goes snicker-snack on the bad syntax
@@ -37,7 +37,7 @@ Bundle 'vim-scripts/argtextobj.vim'
 Bundle 'kana/vim-textobj-user'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'sophacles/vim-bundle-mako'
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-repeat'
@@ -77,7 +77,7 @@ Plugin 'othree/yajs.vim'
 " Postgresql in vim
 Plugin 'vim-scripts/dbext.vim'
 Plugin 'vim-scripts/SQLComplete.vim'
-Plugin 'rdolgushin/groovy.vim'
+"Plugin 'rdolgushin/groovy.vim'
 
 Plugin 'mileszs/ack.vim'
 
@@ -393,7 +393,7 @@ set t_Co=256
 
 " Color scheme
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 
 " }}}
 

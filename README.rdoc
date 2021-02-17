@@ -26,14 +26,17 @@ I am running on GNU/Linux and my dotfiles includes:
  - tmux
  - ruby
  - python
- - Xresource config for rxvt-unicode-256color and rofi
 
 === Dependencies:
 
 
 Debian packages:
 
-  sudo apt install zsh tmux curl python3 python3-venv exuberant-ctags ack i3 i3lock rofi fzf polybar markdown
+  sudo apt install zsh tmux curl python3 python3-venv exuberant-ctags ack i3 i3lock rofi fzf polybar markdown calc xclip feh qrencode
+
+Fonts:
+
+ sudo apt install fonts-firacode fonts-cascadia-code fonts-nanum
 
 Alacritty: https://github.com/alacritty/alacritty/blob/master/INSTALL.md
 
@@ -41,33 +44,17 @@ Alacritty: https://github.com/alacritty/alacritty/blob/master/INSTALL.md
 	
 Standalone installations
 
-  hub (http://hub.github.com) 
-  volnoti (https://github.com/davidbrazdil/volnoti)
   Starship.rs https://starship.rs/
-
-Fonts:
-
- - FiraCode Nerd Font Mono https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode (sudo apt install fonts-firacode)
- - https://github.com/adobe-fonts/source-code-pro 
 
 Spacemacs:
 
-  sudo apt install emacs fonts-nanum
+  sudo apt install emacs
   git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
   git clone https://github.com/guewen/spacemacs.d ~/.spacemacs.d
-
-
-Python modules:
-
-  pip
-  py3status
-  virtualenv
-  fancycompleter
 
 And Ruby gems:
 
   tmuxinator
-
 
 == Features
 
@@ -84,5 +71,4 @@ railsrc files for details.
 == TODO
 
 Autoinstall/checks of packages / python modules
-Fix symlink of .config/alacritty, I want only alacritty to be linked in the existing ~/.config
 

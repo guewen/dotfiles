@@ -7,13 +7,22 @@ $replace_all = false
 desc "install the dot files into user's home directory"
 task :install do
   Dir['*'].each do |file|
-    next if %w[Rakefile README.rdoc LICENSE config].include? file
+    next if %w[Rakefile README.rdoc LICENSE config fonts bin].include? file
     sync(file)
   end
 
   Dir['config/*'].each do |file|
     sync(file)
   end
+
+  Dir['bin/*'].each do |file|
+    sync(file)
+  end
+
+  Dir['fonts/*'].each do |file|
+    sync(file)
+  end
+  system "fc-cache -f"
 end
 
 def sync(file, target_dir=ENV['HOME'])

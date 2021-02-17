@@ -1,0 +1,3 @@
+#!/bin/bash
+
+gkbd-keyboard-display -l usdvp
