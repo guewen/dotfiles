@@ -4,7 +4,7 @@ unsetopt list_beep
 unsetopt correct_all  # disable autocorrect
 
 # History
-HISTFILE=~/.zsh_history         # where to store zsh history
+export HISTFILE=~/.zsh_history  # where to store zsh history
 setopt append_history           # append
 setopt hist_ignore_all_dups     # no duplicate
 unsetopt hist_ignore_space      # ignore space prefixed commands
@@ -14,16 +14,18 @@ setopt inc_append_history       # add commands as they are typed, don't wait unt
 setopt share_history            # share hist between sessions
 setopt bang_hist                # !keyword
 setopt interactivecomments      # allow to put a pound at beginning of line to comment a line
-export HISTORY=1000000000
 export HISTSIZE=1000000000
-export SAVEHIST=$HISTFILESIZE
+export SAVEHIST=$HISTSIZE
+export HISTTIMEFORMAT="[%F %T] "
 setopt HIST_IGNORE_SPACE
-# setopt EXTENDED_HISTORY
+setopt EXTENDED_HISTORY
 
 # Completions
 
 source ~/.zsh/completions/invoke
-eval "$(gh completion -s zsh)"
+if (( $+commands[gh] )); then
+  eval "$(gh completion -s zsh)"
+fi
 
 # activate menu selection
 zstyle ':completion::complete:*' use-cache on               # completion caching, use rehash to clear

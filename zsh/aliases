@@ -39,14 +39,6 @@ alias gloga='git log --oneline --decorate --graph --all'
 
 alias grbc='git rebase --continue'
 
-
-# ack
-alias ack='ack-grep'
-
-# bzr
-alias b='bzr'
-alias bzr_up_all='for file in *; do if [ -d $file ]; then bzr up $file; fi; done'
-
 # various
 alias px="pwd | tr -d '\n' | xsel"
 alias tx='tmuxinator'

@@ -55,9 +55,9 @@ export PYTHONSTARTUP=~/.pythonrc.py
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="/home/gbaconnier/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # antigen adds an alias 'pip=noglop pip', which conflicts with pyenv shims
 unalias pip

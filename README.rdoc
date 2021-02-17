@@ -9,19 +9,20 @@ These are config files to set up a system the way I like it.
     cd ~/.dotfiles
     git submodule init
     git submodule update
+    sudo apt install ruby-full
     rake install
+    chsh -s $(which zsh)
 
   Launch vim, run :BundleInstall (or vim +BundleInstall +qall for CLI lovers)
-
-  If you use urxvt-unicode (the build which supports 256 colors), you have to run:
-
-    xrdb -load ~/.Xresources
-
+  
+  TODO switch to https://zdharma.org/zinit/wiki/ instead of antigen
+  
 == Environment
 
 I am running on GNU/Linux and my dotfiles includes:
  - zsh
- - vim
+ - neovim
+ - spacemacs
  - tmux
  - ruby
  - python
@@ -29,24 +30,32 @@ I am running on GNU/Linux and my dotfiles includes:
 
 === Dependencies:
 
+
 Debian packages:
 
-  rxvt-unicode-256color
-  zsh
-  tmux
-  ruby
-  python
-  exuberant-ctags
-  xsel
-  ack-grep
-  i3
+  sudo apt install zsh tmux curl python3 python3-venv exuberant-ctags ack i3 i3lock rofi fzf polybar markdown
 
+Alacritty: https://github.com/alacritty/alacritty/blob/master/INSTALL.md
+
+  gsettings set org.gnome.desktop.default-applications.terminal exec 'alacritty'
+	
 Standalone installations
 
-  hub (http://hub.github.com)
-  neovim (https://github.com/neovim/neovim)
-  rofi (https://davedavenport.github.io/rofi/)
+  hub (http://hub.github.com) 
   volnoti (https://github.com/davidbrazdil/volnoti)
+  Starship.rs https://starship.rs/
+
+Fonts:
+
+ - FiraCode Nerd Font Mono https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode (sudo apt install fonts-firacode)
+ - https://github.com/adobe-fonts/source-code-pro 
+
+Spacemacs:
+
+  sudo apt install emacs fonts-nanum
+  git clone https://github.com/syl20bnr/spacemacs -b develop ~/.emacs.d
+  git clone https://github.com/guewen/spacemacs.d ~/.spacemacs.d
+
 
 Python modules:
 
@@ -75,4 +84,5 @@ railsrc files for details.
 == TODO
 
 Autoinstall/checks of packages / python modules
+Fix symlink of .config/alacritty, I want only alacritty to be linked in the existing ~/.config
 

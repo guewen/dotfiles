@@ -3,4 +3,4 @@ if command -v keychain &>/dev/null; then
   eval $(keychain --quiet --eval --agents ssh id_rsa)
 fi
 
-source <(gopass completion zsh)
+# source <(gopass completion zsh)
