@@ -257,6 +257,7 @@ set $purple #b16286
 set $aqua #689d68
 set $gray #a89984
 set $darkgray #1d2021
+set $white #fbf1c7
 
 # font used by i3 for titles and bars
 font pango:Hack 8
@@ -266,8 +267,8 @@ font pango:Hack 8
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border
 client.focused          $yellow $yellow $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.focused_inactive $bg $bg $yellow $purple $darkgray
+client.unfocused        $bg $bg $yellow $purple $darkgray
 client.urgent           $red $red $white $red $red
 
 # blue gruvbox
