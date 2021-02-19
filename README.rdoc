@@ -32,7 +32,7 @@ I am running on GNU/Linux and my dotfiles includes:
 
 Debian packages:
 
-  sudo apt install zsh tmux curl python3 python3-venv exuberant-ctags ack i3 i3lock rofi fzf polybar markdown calc xclip feh qrencode
+  sudo apt install zsh tmux curl python3 python3-venv exuberant-ctags ack i3 i3lock rofi fzf polybar markdown calc xclip feh qrencode keychain
 
 Fonts:
 
