@@ -1,0 +1,14 @@
+
+[Desktop Entry]
+Version=1.0
+Name=Keyboard Help
+GenericName=Keyboard Help
+Comment=Show current keyboard layout
+TryExec=~/bin/kbhelp
+Exec=~/bin/kbhelp
+Icon=
+Type=Application
+Terminal=false
+Categories=Utility
+StartupWMClass=Gkbd-keyboard-display
+Keywords=

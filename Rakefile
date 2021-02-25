@@ -8,11 +8,15 @@ $replace_all = false
 desc "install the dot files into user's home directory"
 task :install do
   Dir['*'].each do |file|
-    next if %w[Rakefile README.rdoc LICENSE config fonts bin].include? file
+    next if %w[Rakefile README.rdoc LICENSE config fonts bin local].include? file
     sync(file)
   end
 
   Dir['config/*'].each do |file|
+    sync(file)
+  end
+
+  Dir['local/share/applications/*'].each do |file|
     sync(file)
   end
 
