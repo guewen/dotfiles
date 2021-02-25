@@ -41,7 +41,7 @@ source ~/.zsh/scripts
 source ~/.zsh/tmux
 source ~/.zsh/bindkey
 
-export PATH=$PATH:$HOME/.pyenv/bin:$HOME/.rvm/bin:$HOME/.bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=$PATH:$HOME/.pyenv/bin:$HOME/.rvm/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 export PYTHONSTARTUP=~/.pythonrc.py
 

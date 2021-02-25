@@ -1,5 +1,6 @@
 require 'rake'
 require 'erb'
+require 'fileutils'
 
 
 $replace_all = false
@@ -16,7 +17,7 @@ task :install do
   end
 
   Dir['bin/*'].each do |file|
-    sync(file)
+    sync(file, hidden: false)
   end
 
   Dir['fonts/*'].each do |file|
@@ -25,44 +26,51 @@ task :install do
   system "fc-cache -f"
 end
 
-def sync(file, target_dir=ENV['HOME'])
-  if File.exist?(File.join(target_dir, ".#{file.sub('.erb', '')}"))
-    if File.identical? file, File.join(target_dir, ".#{file.sub('.erb', '')}")
-      puts "identical ~/.#{file.sub('.erb', '')}"
+def sync(file, target_dir: ENV['HOME'], hidden: true)
+  filepath = File.join(
+    target_dir,
+    hidden ? ".#{file.sub('.erb', '')}" : "#{file.sub('.erb', '')}"
+  )
+
+  target_dirname = File.dirname(filepath)
+  FileUtils.mkdir_p(target_dirname) unless File.directory?(target_dirname)
+
+  if File.exist?(filepath)
+    if File.identical? file, filepath
+      puts "identical #{filepath}"
     elsif $replace_all
-      replace_file(file)
+      replace_file(file, filepath)
     else
-      print "overwrite ~/.#{file.sub('.erb', '')}? [ynaq] "
+      print "overwrite #{filepath}? [ynaq] "
       case $stdin.gets.chomp
       when 'a'
         $replace_all = true
-        replace_file(file)
+        replace_file(file, filepath)
       when 'y'
-        replace_file(file)
+        replace_file(file, filepath)
       when 'q'
         exit
       else
-        puts "skipping ~/.#{file.sub('.erb', '')}"
+        puts "skipping #{filepath}"
       end
     end
   else
-    link_file(file)
+    link_file(file, filepath)
   end
 end
 
-def replace_file(file)
-  system %Q{rm -rf "$HOME/.#{file.sub('.erb', '')}"}
-  link_file(file)
+def replace_file(src_file, filepath)
+  system %Q{rm -rf "#{filepath}"}
+  link_file(src_file, filepath)
 end
 
-def link_file(file)
-  if file =~ /.erb$/
-    puts "generating ~/.#{file.sub('.erb', '')}"
-    File.open(File.join(ENV['HOME'], ".#{file.sub('.erb', '')}"), 'w') do |new_file|
-      new_file.write ERB.new(File.read(file)).result(binding)
+def link_file(src_file, filepath)
+  if src_file =~ /.erb$/
+    File.open(filepath, 'w') do |new_file|
+      new_file.write ERB.new(File.read(src_file)).result(binding)
     end
   else
-    puts "linking ~/.#{file}"
-    system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+    puts "linking #{filepath}"
+    system %Q{ln -s "$PWD/#{src_file}" "#{filepath}"}
   end
 end
