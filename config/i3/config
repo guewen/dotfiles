@@ -236,6 +236,7 @@ exec --no-startup-id nm-applet &
 exec --no-startup-id dunst -config ~/.config/i3/dunstrc &
 # exec --no-startup-id volnoti &
 exec --no-startup-id SpiderOakONE &
+exec --no-startup-id emacs --daemon &
 
 # Setup screens
 # exec --no-startup-id autoxrandr
