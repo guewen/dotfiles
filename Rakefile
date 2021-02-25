@@ -70,6 +70,7 @@ end
 
 def link_file(src_file, filepath)
   if src_file =~ /.erb$/
+    puts "generating #{filepath}"
     File.open(filepath, 'w') do |new_file|
       new_file.write ERB.new(File.read(src_file)).result(binding)
     end
