@@ -3,7 +3,7 @@
 SDIR="$HOME/.config/polybar/scripts"
 
 # Launch Rofi
-MENU="$(rofi -no-config -no-lazy-grab -sep "|" -dmenu -i -p '' \
+MENU="$(rofi -no-lazy-grab -sep "|" -dmenu -i -p '' \
 -theme $SDIR/rofi/styles.rasi \
 <<< " Default| Nord| Gruvbox| Dark| Cherry|")"
             case "$MENU" in
