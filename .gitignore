@@ -1,3 +1,6 @@
 vim/.netrwhist
 vim/.VimballRecord
 vim/bundle
+
+# ignore file used for local modifications
+config/polybar/local.ini
