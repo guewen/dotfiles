@@ -1,6 +1,7 @@
 # load keychain to manage SSH and GPG keys
 if command -v keychain &>/dev/null; then
-  eval $(keychain --quiet --eval --agents ssh id_rsa)
+  eval $(keychain --ignore-missing --quiet --eval --agents ssh id_rsa id_ed25519)
+  source $HOME/.keychain/$HOST-sh
 fi
 
 # source <(gopass completion zsh)

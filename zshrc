@@ -59,7 +59,5 @@ eval "$(pyenv init -)"
 # antigen adds an alias 'pip=noglop pip', which conflicts with pyenv shims
 unalias pip
 
-/usr/bin/keychain --ignore-missing --quiet $HOME/.ssh/id_rsa
-source $HOME/.keychain/$HOST-sh
-
 eval "$(starship init zsh)"
+
