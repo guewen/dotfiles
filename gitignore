@@ -14,3 +14,7 @@ Session.vim
 *~
 
 .mypy_cache
+
+GPATH
+GTAGS
+GRTAGS
