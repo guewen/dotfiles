@@ -1,0 +1,11 @@
+#! /bin/sh
+if [ $# -ne 1 ]
+then
+  exit 1
+fi
+if [ -n "${SOPS_ENCRYPTED_DIFF}" ]
+then
+  cat "$1"
+else
+  sops -d "$1" 2>&1 || cat "$1"
+fi
