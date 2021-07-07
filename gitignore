@@ -18,3 +18,11 @@ Session.vim
 GPATH
 GTAGS
 GRTAGS
+
+*.map
+
+.env
+
+.python-version
+
+.ignore
