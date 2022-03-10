@@ -14,6 +14,7 @@ rofi_command="rofi -theme $dir/powermenu.rasi"
 shutdown=" Shutdown"
 reboot=" Restart"
 lock=" Lock"
+hibernate=" Hibernate"
 suspend=" Sleep"
 logout=" Logout"
 
@@ -32,7 +33,7 @@ msg() {
 }
 
 # Variable passed to rofi
-options="$lock\n$suspend\n$logout\n$reboot\n$shutdown"
+options="$lock\n$suspend\n$hibernate\n$logout\n$reboot\n$shutdown"
 
 chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 0)"
 case $chosen in
@@ -73,6 +74,16 @@ case $chosen in
 			exit 0
         else
 			msg
+        fi
+        ;;
+    $hibernate)
+		    ans=$(confirm_exit &)
+		    if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
+			      systemctl hibernate
+		    elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
+			      exit 0
+        else
+			      msg
         fi
         ;;
     $logout)
