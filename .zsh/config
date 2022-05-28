@@ -1,0 +1,4 @@
+export EDITOR='vim'
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
+export LESS="-SXFR"

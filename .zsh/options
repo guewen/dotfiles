@@ -1,0 +1,2 @@
+setopt share_history            # share hist between sessions
+export HISTSIZE=10000000

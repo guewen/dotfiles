@@ -1,0 +1,43 @@
+# ls
+alias ls="ls -F"
+alias l="ls -lAh"
+alias ll="ls -l"
+alias la='ls -A'
+
+# less
+alias less='less --quiet'
+
+# df / du
+alias df='df --human-readable'
+alias du='du --human-readable'
+
+# git
+alias gs="git status"
+compdef _git gs=git-status
+alias changelog='git log `git log -1 --format=%H -- CHANGELOG*`..; cat CHANGELOG*'
+
+alias g='git'
+alias ga='git add'
+alias gc='git commit -v'
+alias glo='git log --decorate'
+
+alias gd='git diff'
+alias gdca='git diff --cached'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+alias glols="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --stat"
+alias glod="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset'"
+alias glods="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short"
+alias glola="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all"
+alias glog='git log --oneline --decorate --graph'
+alias gloga='git log --oneline --decorate --graph --all'
+
+alias grbc='git rebase --continue'
+
+# various
+alias px="pwd | tr -d '\n' | xsel"
+
+alias doco='docker-compose'
+alias docu='docker-compose up -d'
+alias docl='docker-compose logs'
+
+alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
