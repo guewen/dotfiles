@@ -41,3 +41,5 @@ alias docu='docker-compose up -d'
 alias docl='docker-compose logs'
 
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+alias rt='rails test'
