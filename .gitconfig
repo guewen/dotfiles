@@ -1,0 +1,49 @@
+[user]
+	name = Guewen Baconnier
+	email = guewen@gmail.com
+[alias]
+  co = checkout
+  ui = auto
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  recent-branches = "!git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | nl -w2 -s'> ' "
+  r = "!f() { git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | awk -v var=\"$1\" 'NR==var' | xargs git checkout ; }; f"
+  pushf = push --force-with-lease
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+[rebase]
+  autosquash = true
+[mergetool]
+  prompt = false
+[core]
+	excludesfile = <%= ENV['HOME'] %>/.gitignore
+	editor = emacsclient -c
+	autocrlf = input
+[apply]
+	whitespace = nowarn
+[format]
+	pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[github]
+	user = guewen
+	token = 
+[push]
+	default = simple
+[rerere]
+	enabled = true
+[diff]
+	algorithm = histogram
+
+[diff "sops"]
+        textconv = sops-git-diff-helper
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
