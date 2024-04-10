@@ -8,8 +8,8 @@ fi
 if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
-if [[ -e .localrc ]]; then
-  source .localrc
+if [[ -e ~/.localrc ]]; then
+  source ~/.localrc
 fi
 
 # custom zsh configs
