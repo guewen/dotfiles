@@ -1,0 +1,52 @@
+import = [
+  "~/.config/alacritty/catppuccin-macchiato.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+# [colors.bright]
+# black = "0x72696a"
+# blue = "0xf38d70"
+# cyan = "0x85dacc"
+# green = "0xadda78"
+# magenta = "0xa8a9eb"
+# red = "0xfd6883"
+# white = "0xfff1f3"
+# yellow = "0xf9cc6c"
+
+# [colors.normal]
+# black = "0x2c2525"
+# blue = "0xf38d70"
+# cyan = "0x85dacc"
+# green = "0xadda78"
+# magenta = "0xa8a9eb"
+# red = "0xfd6883"
+# white = "0xfff1f3"
+# yellow = "0xf9cc6c"
+
+# [colors.primary]
+# background = "0x2c2525"
+# foreground = "0xfff1f3"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Key9"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Key2"
+mods = "Control"
+
+[window]
+opacity = 0.95
+
+#[font]
+#size = 20
+#
