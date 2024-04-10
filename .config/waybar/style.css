@@ -111,6 +111,7 @@ window#waybar.hidden {
 #temperature,
 #custom-idle_inhibitor,
 #custom-dnd,
+#custom-notification,
 #cpu,
 #custom-playerctl,
 #tray {
@@ -207,6 +208,11 @@ window#waybar.hidden {
 
 #custom-idle_inhibitor, #custom-dnd {
   background-color: @rosewater;
+}
+
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+  background-color: @pink;
 }
 
 tooltip {
