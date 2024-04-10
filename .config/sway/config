@@ -8,8 +8,8 @@
 set $theme /usr/share/sway/themes/matcha-green
 
 # theme variables
-include $theme/theme.conf
-# include themes/catppuccin-macchiato/theme.conf
+# include $theme/theme.conf
+include themes/catppuccin-macchiato/theme.conf
 
 # user theme variable can override the global theme
 include $HOME/.config/sway/definitions.d/theme.conf
