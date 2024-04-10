@@ -1,0 +1,221 @@
+/*
+*
+* Catppuccin Macchiato palette
+* Maintainer: rubyowo
+*
+*/
+
+@define-color base   #24273a;
+@define-color mantle #1e2030;
+@define-color crust  #181926;
+
+@define-color text     #cad3f5;
+@define-color subtext0 #a5adcb;
+@define-color subtext1 #b8c0e0;
+
+@define-color surface0 #363a4f;
+@define-color surface1 #494d64;
+@define-color surface2 #5b6078;
+
+@define-color overlay0 #6e738d;
+@define-color overlay1 #8087a2;
+@define-color overlay2 #939ab7;
+
+@define-color blue      #8aadf4;
+@define-color lavender  #b7bdf8;
+@define-color sapphire  #7dc4e4;
+@define-color sky       #91d7e3;
+@define-color teal      #8bd5ca;
+@define-color green     #a6da95;
+@define-color yellow    #eed49f;
+@define-color peach     #f5a97f;
+@define-color maroon    #ee99a0;
+@define-color red       #ed8796;
+@define-color mauve     #c6a0f6;
+@define-color pink      #f5bde6;
+@define-color flamingo  #f0c6c6;
+@define-color rosewater #f4dbd6;
+
+@define-color background_color @base;
+@define-color theme_selected_bg_color @blue;
+
+@import "/usr/share/sway/templates/waybar/style.css";
+
+* {
+  /* reference the color by using @color-name */
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: JetBrainsMono Nerd Font, mononoki Nerd Font;
+  font-size: 14px;
+}
+
+
+window#waybar {
+  /* you can also GTK3 CSS functions! */
+  background-color: shade(@base, 0.9);
+  border: 2px solid alpha(@crust, 0.3);
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.5;
+}
+
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  all: initial; /* Remove GTK theme values (waybar #1351) */
+  min-width: 0; /* Fix weird spacing in materia (waybar #450) */
+  box-shadow: inset 0 -3px transparent; /* Use box-shadow instead of border so the text isn't offset */
+  padding: 6px 18px;
+  margin: 6px 3px;
+  border-radius: 4px;
+  background-color: @mantle;
+  color: @text;
+}
+
+#workspaces button.active, #workspaces button.focused {
+  color: @mantle;
+  background-color: @blue;
+}
+
+#workspaces button:hover {
+ box-shadow: inherit;
+ text-shadow: inherit;
+ color: @mantle;
+ background-color: @lavender;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+}
+
+#custom-menu,
+#custom-scratchpad,
+#memory,
+#custom-power,
+#battery,
+#backlight,
+#pulseaudio,
+#network,
+#custom-vpn,
+#wireplumber,
+#clock,
+#bluetooth,
+#custom-pacman,
+#custom-clipboard,
+#temperature,
+#custom-idle_inhibitor,
+#custom-dnd,
+#cpu,
+#custom-playerctl,
+#tray {
+  border-radius: 4px;
+  margin: 6px 3px;
+  padding: 6px 12px;
+  background-color: @mantle;
+  color: @crust;
+}
+
+
+#custom-menu {
+  background-color: @pink;
+}
+
+#custom-scratchpad {
+  background-color: @peach;
+}
+
+#custom-power {
+  margin-right: 6px;
+}
+
+#custom-clipboard {
+  background-color: @peach;
+}
+
+#cpu {
+  background-color: @rosewater;
+}
+
+#temperature {
+  background-color: @rosewater;
+}
+
+#memory {
+  background-color: @rosewater;
+}
+#battery {
+  background-color: @red;
+}
+@keyframes blink {
+  to {
+    background-color: @red;
+    color: @crust;
+  }
+}
+
+#battery.warning,
+#battery.critical,
+#battery.urgent {
+  background-color: #ff0048;
+  color: @crust;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+#battery.charging {
+  background-color: @green;
+}
+
+#wireplumber {
+  font-family: JetBrainsMono Nerd Font;
+  background-color: @yellow;
+}
+
+#network {
+  background-color: @teal;
+}
+
+#custom-vpn {
+  background-color: @sky;
+}
+
+#clock {
+  font-family: JetBrainsMono Nerd Font;
+  background-color: @mauve;
+}
+
+#custom-pacman {
+  background-color: @maroon;
+}
+
+#bluetooth {
+  background-color: @sapphire;
+}
+
+#custom-playerctl {
+  font-family: JetBrainsMono Nerd Font;
+  background-color: @green;
+}
+
+#custom-idle_inhibitor, #custom-dnd {
+  background-color: @rosewater;
+}
+
+tooltip {
+  border-radius: 8px;
+  padding: 15px;
+  background-color: @mantle;
+}
+
+tooltip label {
+  padding: 5px;
+  background-color: @mantle;
+}
