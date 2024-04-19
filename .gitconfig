@@ -9,6 +9,14 @@
   recent-branches = "!git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | nl -w2 -s'> ' "
   r = "!f() { if [ -z \"$1\" ]; then git recent-branches; else git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | awk -v var=\"$1\" 'NR==var' | xargs git checkout ; fi ; }; f"
   pushf = push --force-with-lease
+  fpick = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git fixup"
+  fixup = "!f() { \
+           if [ -z \"$1\" ]; then \
+             git fpick; \
+           else \
+             git diff-files --quiet || (echo Unstaged changes, please commit or stash with --keep-index; exit 1); \
+             COMMIT=$(git rev-parse $1) && git commit --fixup=$COMMIT && git rebase -i --autosquash $COMMIT~1 ; \
+           fi ; }; f"
 
 [color]
 	diff = auto
