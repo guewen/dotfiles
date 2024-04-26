@@ -1,4 +1,5 @@
 {
+    "layer": "top",
     "include": [
         "/usr/share/sway/templates/waybar/config.jsonc"
     ],
@@ -22,8 +23,8 @@
 
         // media
         "custom/playerctl",
-        "custom/notification",
         "custom/idle_inhibitor",
+        "custom/dnd",
         //"pulseaudio",
         "wireplumber",
         "backlight",
@@ -50,26 +51,5 @@
         "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
         "return-type": "json",
         "interval": 5
-    },
-
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{} {icon}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
-        "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
     },
 }
