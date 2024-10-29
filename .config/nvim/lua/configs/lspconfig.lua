@@ -3,6 +3,16 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
+local lsp_configurations = require "lspconfig.configs"
+lsp_configurations.odoo_lsp = {
+  default_config = {
+    name = "odoo-lsp",
+    cmd = { "odoo-lsp" },
+    filetypes = { "javascript", "xml", "python" },
+    root_dir = require("lspconfig.util").root_pattern(".odoo_lsp", ".odoo_lsp.json", ".git"),
+  },
+}
+
 local servers = {
   html = {},
   cssls = {},
@@ -13,20 +23,17 @@ local servers = {
     filetypes = { "ruby" },
     root_dir = lspconfig.util.root_pattern ".rubocop.yml",
   },
-  ruby_lsp = {
-    cmd = { "~/.rbenv/shims/ruby-lsp" },
-    filetypes = { "ruby" },
-    root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
-  },
+  ruby_lsp = {},
   sorbet = {
     cmd = { "bundle", "exec", "srb", "tc", "--lsp" },
     filetypes = { "ruby" },
     root_dir = lspconfig.util.root_pattern "sorbet/config",
   },
+  odoo_lsp = {},
   pyright = {},
   dockerls = {},
   yamlls = {},
-  tsserver = {},
+  ts_ls = {},
 }
 
 local nvlsp = require "nvchad.configs.lspconfig"
@@ -36,7 +43,7 @@ for name, opts in pairs(servers) do
   opts.on_attach = nvlsp.on_attach
   opts.capabilities = nvlsp.capabilities
 
-  require("lspconfig")[name].setup(opts)
+  lspconfig[name].setup(opts)
 end
 
 -- configuring single server, example: typescript

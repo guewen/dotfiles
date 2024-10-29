@@ -87,6 +87,11 @@ return {
     end,
   },
 
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    requires = { "nvim-telescope/telescope.nvim" },
+  },
+
   -- {
   --   "Isrothy/neominimap.nvim",
   --   enabled = true,
@@ -131,6 +136,14 @@ return {
     -- optional, but required for fuzzy finder support
     dependencies = {
       "nvim-telescope/telescope-fzf-native.nvim",
+    },
+  },
+
+  {
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
+    dependencies = {
+      "tpope/vim-rhubarb",
     },
   },
 }

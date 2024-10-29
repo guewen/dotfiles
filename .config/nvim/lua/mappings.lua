@@ -31,8 +31,19 @@ vim.api.nvim_set_keymap("n", "<leader>fg", ":lua copy_file_path_and_line()<CR>",
 -- open file_browser with the path of the current buffer
 vim.keymap.set("n", "<space>fE", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
 
-vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep search_dirs=%:p:h<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>fW", "<cmd>Telescope live_grep<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fw", "<cmd>Telescope live_grep_args<CR>", { noremap = true, silent = true })
+vim.keymap.set(
+  "n",
+  "<leader>fW",
+  '<cmd>Telescope live_grep_args search_dirs={"%:p:h"}<CR>',
+  { noremap = true, silent = true }
+)
+vim.keymap.set(
+  "n",
+  "<leader>f<space>",
+  "<CMD>lua require('telescope-live-grep-args.shortcuts').grep_word_under_cursor()<CR>",
+  { noremap = true, silent = true }
+)
 
 vim.keymap.set("n", "<leader>fd", "<cmd>Telescope dir live_grep<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>pd", "<cmd>Telescope dir find_files<CR>", { noremap = true, silent = true })

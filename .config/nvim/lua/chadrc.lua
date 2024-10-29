@@ -11,6 +11,11 @@ M.base46 = {
   --   Comment = { italic = true },
   --   ["@comment"] = { italic = true },
   -- },
+  --
+  hl_override = {
+    Comment = { fg = "#9aa2be" },
+    ["@comment"] = { fg = "#9aa2be" },
+  },
 }
 
 return M
