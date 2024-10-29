@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -eou pipefail
+
+jira issue list \
+        -a"$(jira me)" \
+        --plain  \
+        --columns id,summary,status |
+        fzf \
+            --layout=reverse \
+            --header-lines=1 \
+            --header=$'\x1b[33;1malt-p\x1b[34;1m toggle-preview, \x1b[33;1malt-j\x1b[34;1m preview-up, \x1b[33;1malt-j\x1b[34;1m preview-down,\n\x1b[33;1malt-e\x1b[34;1m edit, \x1b[33;1malt-o\x1b[34;1m open, \x1b[33;1malt-u\x1b[34;1m copy url, \x1b[33;1malt-y\x1b[34;1m copy issue key, \x1b[33;1malt-m\x1b[34;1m move issue, \x1b[33;1malt-c\x1b[34;1m comment' \
+            --preview-window 'bottom:80%:wrap' \
+            --preview 'jira issue view {1}' \
+            --bind 'alt-p:toggle-preview' \
+            --bind='alt-j:preview-up' \
+            --bind='alt-k:preview-down' \
+            --bind 'alt-e:execute(jira issue edit {1})' \
+            --bind 'alt-o:become(jira open {1})' \
+            --bind 'alt-u:become(jira open --no-browser {1} | wl-copy)' \
+            --bind "alt-y:become[jira open --no-browser {1} | awk -F/ '{print \$NF}' | wl-copy ]" \
+            --bind 'alt-m:execute(jira issue move {1})' \
+            --bind 'alt-c:become(jira issue comment add {1})'
