@@ -17,7 +17,7 @@ jira issue list \
             --bind='alt-k:preview-down' \
             --bind 'alt-e:execute(jira issue edit {1})' \
             --bind 'alt-o:become(jira open {1})' \
-            --bind 'alt-u:become(jira open --no-browser {1} | wl-copy)' \
-            --bind "alt-y:become[jira open --no-browser {1} | awk -F/ '{print \$NF}' | wl-copy ]" \
+            --bind 'alt-u:execute(jira open --no-browser {1} | wl-copy -n)' \
+            --bind "alt-y:execute[jira open --no-browser {1} | awk -F/ '{print \$NF}' | wl-copy -n ]" \
             --bind 'alt-m:execute(jira issue move {1})' \
             --bind 'alt-c:become(jira issue comment add {1})'
