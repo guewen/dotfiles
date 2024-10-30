@@ -49,16 +49,6 @@ vim.g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/lua_snippets"
 
 vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
 
-require("conform").setup {
-  format_on_save = function(bufnr)
-    -- Disable with a global or buffer-local variable
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-      return
-    end
-    return { timeout_ms = 500, lsp_format = "fallback" }
-  end,
-}
-
 vim.api.nvim_create_user_command("FormatDisable", function(args)
   if args.bang then
     -- FormatDisable! will disable formatting just for this buffer

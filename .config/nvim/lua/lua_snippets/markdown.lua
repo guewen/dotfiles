@@ -14,3 +14,4 @@ ls.add_snippets("markdown", {
     ls.insert_node(1),
   }),
 })
+
