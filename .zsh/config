@@ -1,3 +1,4 @@
 export EDITOR='emacsclient -c'
 export LESS='-R'
 export LESS="-SXFR"
+export RIPGREP_CONFIG_PATH=~/.config/ripgreprc

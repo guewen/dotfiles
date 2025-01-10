@@ -1,0 +1,4 @@
+--glob=!app/assets/javascripts/i18n/*.js
+
+--max-columns=300
+--max-columns-preview
