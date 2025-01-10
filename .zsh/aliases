@@ -1,5 +1,5 @@
 # ls
-alias ls="ls -F"
+alias ls="ls -F --hyperlink=auto"
 alias l="ls -lAh"
 alias ll="ls -l"
 alias la='ls -A'
@@ -43,3 +43,5 @@ alias docl='docker-compose logs'
 alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 alias rt='rails test'
+
+alias icat="kitten icat"
