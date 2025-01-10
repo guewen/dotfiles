@@ -1,4 +1,4 @@
-export EDITOR='emacsclient -c'
+export EDITOR='nvim'
 export LESS='-R'
 export LESS="-SXFR"
 export RIPGREP_CONFIG_PATH=~/.config/ripgreprc

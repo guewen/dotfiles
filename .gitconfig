@@ -32,7 +32,8 @@
   prompt = false
 [core]
 	excludesfile = <%= ENV['HOME'] %>/.gitignore
-	editor = emacsclient -c
+  #editor = emacsclient -c
+  editor = nvim
 	autocrlf = input
 [apply]
 	whitespace = nowarn
