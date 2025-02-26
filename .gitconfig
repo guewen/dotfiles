@@ -19,7 +19,7 @@
              git diff-files --quiet || (echo Unstaged changes, please commit or stash with --keep-index; exit 1); \
              COMMIT=$(git rev-parse $1) && git commit --fixup=$COMMIT && git rebase -i --autosquash $COMMIT~1 ; \
            fi ; }; f"
-  yank = "!git log -n 50 --pretty=format:'%h %s' --no-merges \"$@\" | fzf | cut -c -12 | xargs -o wl-copy"
+  yank = "!f() { git log -n 50 --pretty=format:'%h %s' --no-merges \"$@\" | fzf | cut -c -12 | xargs wl-copy ; }; f"
   y = yank
   choose-rebase = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git rebase -i --autosquash "
   cr = choose-rebase
