@@ -170,4 +170,43 @@ return {
       { "<leader>ug", ":GHLitePROpenComment<cr>", silent = true },
     },
   },
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10,
+    opts = {
+      -- your configuration
+    },
+  },
+
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" }, -- optional
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+  },
+
+  -- {
+  --   "chrisgrieser/nvim-early-retirement",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("early-retirement").setup {
+  --       -- If a buffer has been inactive for this many minutes, close it.
+  --       retirementAgeMins = 120,
+  --
+  --       -- Minimum number of open buffers for auto-closing to become active. E.g.,
+  --       -- by setting this to 4, no auto-closing will take place when you have 3
+  --       -- or fewer open buffers. Note that this plugin never closes the currently
+  --       -- active buffer, so a number < 2 will effectively disable this setting.
+  --       minimumBufferNum = 6,
+  --
+  --       -- When a file is deleted, for example via an external program, delete the
+  --       -- associated buffer as well. Requires Neovim >= 0.10.
+  --       -- (This feature is independent from the automatic closing)
+  --       deleteBufferWhenFileDeleted = true,
+  --     }
+  --   end,
+  -- },
 }
