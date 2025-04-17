@@ -7,6 +7,7 @@ local options = {
     ruby = { "rubocop" },
     rust = { "rustfmt" },
     typescript = { "eslint" },
+    sql = { "pg_format" },
   },
 
   format_on_save = function(bufnr)
