@@ -11,3 +11,15 @@ dotfiles restore -- <file>
 ```
 
 See https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html
+
+
+Packages to install (at least)
+
+```
+starship
+ripgrep
+keychain
+neovim
+tmux
+https://github.com/tmux-plugins/tpm
+```
