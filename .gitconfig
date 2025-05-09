@@ -1,7 +1,7 @@
 [user]
 	name = Guewen Baconnier
 	email = guewen@gmail.com
-	signingkey = /home/guewen/.ssh/id_ed25519
+	signingkey = ~/.ssh/id_ed25519
 [alias]
   co = checkout
   ui = auto
@@ -36,7 +36,7 @@
 [mergetool]
   prompt = false
 [core]
-	excludesfile = <%= ENV['HOME'] %>/.gitignore
+	excludesfile = ~/.gitignore
   #editor = emacsclient -c
   editor = nvim
 	autocrlf = input
