@@ -6,8 +6,8 @@ git clone --bare git@github.com:guewen/dotfiles.git $HOME/.dotfiles -b <branch>
 dotfiles config --local status.showUntrackedFiles no
 
 # For all "deleted" files
-dotfiles reset ...
-dotfiles restore ...
+dotfiles reset -- <file>
+dotfiles restore -- <file>
 ```
 
 See https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html
