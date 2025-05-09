@@ -1,4 +1,6 @@
 return {
+  { import = "nvchad.blink.lazyspec" },
+
   {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
