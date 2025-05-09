@@ -44,4 +44,7 @@ alias whatismyip='dig +short myip.opendns.com @resolver1.opendns.com'
 
 alias rt='rails test'
 
-alias icat="kitten icat"
+alias cp="cp -i"                                                # Confirm before overwriting something
+alias df='df -h'                                                # Human-readable sizes
+alias free='free -m'                                            # Show sizes in MB
+
