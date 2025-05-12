@@ -1,0 +1,50 @@
+# Fallback icon
+default_icon = "•"
+
+# Format string for determining the new workspace name. Placeholders are
+# %n  number of the workspace
+# %i  icon from the map below
+format_str = "%n %i "
+
+# Separator between workspace icons
+icon_separator = ""
+
+[icons]
+'/NVIM ?\w*/' = ''
+"alacritty" = ''
+"foot" = ''
+"footclient" = ''
+"emacs" = ""
+"thunar" = ""
+"code" = ""
+"spotify" = ""
+"tm" = ""
+"pm" = ""
+"libreoffice-startcenter" = ""
+"evince" = ""
+"signal" = ""
+"thunderbird" = ""
+"Slack" = ""
+'Signal' = '󰍡'
+'discord' = '󰙯'
+'WebCord' = '󰙯'
+'polkit-gnome-authentication-agent-1' = ''
+'Keybase' = '󱕴'
+'vlc' = '󰕼'
+'Bitwarden' = ''
+'kitty' = ''
+
+## browsers
+'google-chrome' = ''
+'Google-chrome' = ''
+'Google-chrome-unstable' = ''
+'google-chrome-unstable' = ''
+'Google-chrome-beta' = ''
+'google-chrome-beta' = ''
+'chromium' = ''
+'firefox' = ''
+'firefoxdeveloperedition' = ''
+'vivaldi-stable' = ''
+'zen' = ''
+
+'swappy' = '󰄄'
