@@ -22,5 +22,6 @@ keychain
 neovim
 tmux
 piow
+zsh-autosuggestions
 https://github.com/tmux-plugins/tpm
 ```

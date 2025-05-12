@@ -1,3 +1,7 @@
+if [[ -e /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/guewenb/.zshrc'
 
