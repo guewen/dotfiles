@@ -23,5 +23,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
 setopt share_history            # share hist between sessions
-export HISTSIZE=10000000
+export HISTSIZE=100000
+export SAVEHIST=100000
 export HISTFILE=~/.zhistory
