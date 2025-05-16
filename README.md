@@ -23,5 +23,7 @@ neovim
 tmux
 piow
 zsh-autosuggestions
+gnome-power-manager
+blueberry
 https://github.com/tmux-plugins/tpm
 ```
