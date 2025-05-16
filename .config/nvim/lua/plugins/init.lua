@@ -1,5 +1,28 @@
 return {
-  { import = "nvchad.blink.lazyspec" },
+  -- { import = "nvchad.blink.lazyspec" },
+  --
+  -- {
+  --   "Saghen/blink.cmp",
+  --   opts = {
+  --     keymap = {
+  --       preset = "none",
+  --
+  --       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+  --       ["<C-e>"] = { "hide", "fallback" },
+  --       ["<CR>"] = { "accept", "fallback" },
+  --
+  --       ["<Up>"] = { "select_prev", "fallback" },
+  --       ["<Down>"] = { "select_next", "fallback" },
+  --       ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+  --       ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+  --
+  --       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+  --       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+  --
+  --       ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+  --     },
+  --   },
+  -- },
 
   {
     "stevearc/conform.nvim",
@@ -71,6 +94,18 @@ return {
     lazy = false,
   },
 
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup {
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     }
+  --   end,
+  -- },
+  --
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
