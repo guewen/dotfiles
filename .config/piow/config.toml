@@ -11,9 +11,11 @@ icon_separator = ""
 
 [icons]
 '/NVIM ?\w*/' = ''
+'/vim/' = ''
 "alacritty" = ''
 "foot" = ''
 "footclient" = ''
+"/footclient/" = ''
 "emacs" = ""
 "thunar" = ""
 "code" = ""
