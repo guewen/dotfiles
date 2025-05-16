@@ -1,3 +1,4 @@
+# Use swaymsg -t get_tree to get the app_id
 # Custom windowing rules
 for_window [class="Yad" instance="yad"] floating enable
 for_window [app_id="yad"] floating enable
@@ -15,9 +16,14 @@ for_window [app_id="floating_shell_portrait"] floating enable, border pixel 1, s
 for_window [title="Picture in picture"] floating enable, sticky enable
 for_window [title="waybar_htop"] floating enable, resize set width 70 ppt height 70 ppt
 for_window [title="waybar_nmtui"] floating enable
+for_window [app_id="org.gnome.PowerStats"] floating enable
 for_window [title="Save File"] floating enable
 for_window [app_id="firefox" title="Firefox — Sharing Indicator"] kill
+for_window [app_id="blueberry.py"] floating enable
 
 # Inhibit idle
 for_window [app_id="firefox"] inhibit_idle fullscreen
 for_window [app_id="Chromium"] inhibit_idle fullscreen
+
+for_window [app_id="firefox" title="^Picture-in-Picture$"] \
+    floating enable, move position 877 450, sticky enable

@@ -59,10 +59,12 @@
     "modules-right": [
         "custom/playerctl",
         "custom/keyboard-layout",
+        "power-profiles-daemon",
         "idle_inhibitor",
         "cpu",
         "memory",
         "backlight",
+        "bluetooth",
         "pulseaudio",
         "battery",
         "clock",
@@ -78,6 +80,18 @@
         // See example config for sending signal to Waybar in ~/.config/sway/config.d/input
         "signal": 1,
         "on-click": "~/.config/waybar/scripts/keyhint.sh"
+    },
+
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
     },
 
     "idle_inhibitor": {
@@ -118,6 +132,19 @@
         "on-scroll-up": "brightnessctl -c backlight set +5%"
     },
 
+    "bluetooth": {
+      // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
+      "format": " {status}",
+      "on-click": "blueberry",
+      "format-connected": " {device_alias}",
+      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+      // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+      "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    },
+
     "pulseaudio": {
         "scroll-step": 2,
         "format": "{icon} {volume}%",
@@ -140,7 +167,8 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "gnome-power-statistics"
     },
 
     "clock": {
