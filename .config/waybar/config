@@ -172,9 +172,9 @@
     },
 
     "clock": {
-        "format": "󰅐 {:%H:%M}",
-        "format-alt": "󰅐 {:%OI:%M %p}",
-        "tooltip-format": " {:%A %m/%d}\n\n<tt><small>{calendar}</small></tt>",
+        "format": "󰅐 {:%e %b %H:%M}",
+        "format-alt": "󰅐 {%H:%M:%S}",
+        "tooltip-format": " {:%A %d.%m.%Y}\n\n<tt>{calendar}</tt>",
         "calendar": {
             "on-scroll": 1,
             "format": {
@@ -186,6 +186,8 @@
             },
         },
         "actions": {
+            "on-click-right": "mode",
+            "on-click-middle": "shift_reset",
             "on-scroll-up": "shift_up",
             "on-scroll-down": "shift_down"
         },
