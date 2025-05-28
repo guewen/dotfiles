@@ -10,22 +10,22 @@ map("i", "jk", "<ESC>")
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 --
 -- Function to copy the current file path to the clipboard
-function copy_file_path()
-  local file_path = vim.fn.expand "%."
+function CopyFilePath()
+  local file_path = vim.fn.expand "%:."
   vim.fn.system("wl-copy", file_path)
   print("Copied file path: " .. file_path)
 end
 
 -- Function to copy the current file path and line number to the clipboard
-function copy_file_path_and_line()
-  local file_path = vim.fn.expand "%." .. ":" .. vim.fn.line "."
+function CopyFilePathAndLine()
+  local file_path = vim.fn.expand "%:." .. ":" .. vim.fn.line "."
   vim.fn.system("wl-copy", file_path)
   print("Copied file path and line: " .. file_path)
 end
 
 -- Setting up the key mappings
-vim.api.nvim_set_keymap("n", "<leader>fG", ":lua copy_file_path()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fg", ":lua copy_file_path_and_line()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fG", ":lua CopyFilePath()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fg", ":lua CopyFilePathAndLine()<CR>", { noremap = true, silent = true })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 --
