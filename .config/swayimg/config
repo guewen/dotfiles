@@ -146,10 +146,13 @@ bottom_right = name,status
 ################################################################################
 [keys.viewer]
 F1 = help
+? = help
 Home = first_file
 End = last_file
 Prior = prev_file
 Next = next_file
+k = prev_file
+j = next_file
 Space = next_file
 Shift+r = rand_file
 Shift+d = prev_dir
@@ -204,14 +207,19 @@ Alt+ScrollDown = next_frame
 ################################################################################
 [keys.gallery]
 F1 = help
+? = help
 Home = first_file
 End = last_file
 Left = step_left
 Right = step_right
 Up = step_up
 Down = step_down
-Prior = page_up
-Next = page_down
+h = step_left
+l = step_right
+k = step_up
+j = step_down
+j = prev_file
+k = next_file
 c = skip_file
 f = fullscreen
 Return = mode
