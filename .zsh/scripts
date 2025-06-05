@@ -4,6 +4,25 @@ if command -v keychain &>/dev/null; then
   source $HOME/.keychain/$HOST-sh
 fi
 
+if [[ -r "/usr/share/z/z.sh" ]]; then
+  source /usr/share/z/z.sh
+
+  cd() {
+    # Go to home without arguments
+    [ -z "$*" ] && builtin cd && return
+    # If directory exists, change to it
+    [ -d "$*" ] && builtin cd "$*" && return
+    [ "$*" = "-" ] && builtin cd "$*" && return
+    # Catch cd . and cd ..
+    case "$*" in
+      ..) builtin cd ..; return;;
+      .) builtin cd .; return;;
+    esac
+    # Finally, call zoxide
+    _z "$*" || builtin cd "$*"
+  }
+fi
+
 # https://github.com/amyreese/zsh-titles
 source "$(dirname $0)/plugins/titles.plugin.zsh"
 
@@ -31,3 +50,4 @@ function chpwd-osc7-pwd() {
     (( ZSH_SUBSHELL )) || osc7-pwd
 }
 add-zsh-hook -Uz chpwd chpwd-osc7-pwd
+

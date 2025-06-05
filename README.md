@@ -25,6 +25,6 @@ piow
 zsh-autosuggestions
 gnome-power-manager
 blueberry
-capitaine-cursors
+z
 https://github.com/tmux-plugins/tpm
 ```
