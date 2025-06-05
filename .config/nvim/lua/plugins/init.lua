@@ -225,6 +225,11 @@ return {
     },
   },
 
+  {
+    "tpope/vim-obsession",
+    lazy = false,
+  },
+
   -- {
   --   "chrisgrieser/nvim-early-retirement",
   --   event = "VeryLazy",
