@@ -38,7 +38,7 @@ exec sleep 2 && firewall-applet
 exec eos-welcome --startdelay=3
 
 # Sway Fader
-exec python3 ~/.config/sway/scripts/swayfader.py
+# exec python3 ~/.config/sway/scripts/swayfader.py
 
 # thumbnails in waybar workspaces
 exec_always --no-startup-id piow --syslog

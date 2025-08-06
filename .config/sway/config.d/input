@@ -42,6 +42,12 @@ input "28269:1:KBDFans_NIU_Mini" {
     xkb_options compose:menu
 }
 
+input "19280:13360:KPRepublic_BM40_Hotswap_RGB" {
+    xkb_layout "ch"
+    xkb_variant "fr"
+    xkb_options compose:menu
+}
+
 input "1149:8257:Kensington_Kensington_Slimblade_Trackball" {
     #accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
     pointer_accel 0.3 # set mouse sensitivity (between -1 and 1)
