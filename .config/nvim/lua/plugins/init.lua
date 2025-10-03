@@ -212,7 +212,17 @@ return {
     event = "VeryLazy",
     priority = 10,
     opts = {
-      -- your configuration
+      overwrite = {
+        search = {
+          enabled = true,
+        },
+        undo = {
+          enabled = true,
+        },
+        redo = {
+          enabled = true,
+        },
+      },
     },
   },
 

@@ -26,8 +26,16 @@ local options = {
 
   formatters = {
     rubocop = {
-      command = "bundle exec rubocop",
-      args = { "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
+      command = "rubocop",
+      args = {
+        "--server",
+        "-a",
+        "-f",
+        "quiet",
+        "--stderr",
+        "--stdin",
+        "$FILENAME",
+      },
     },
   },
 }

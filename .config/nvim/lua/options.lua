@@ -66,3 +66,15 @@ vim.api.nvim_create_user_command("FormatEnable", function()
 end, {
   desc = "Re-enable autoformat-on-save",
 })
+
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.rb",
+--   callback = function()
+--     vim.lsp.buf.format {
+--       timeout_ms = 1000,
+--       filter = function(client)
+--         return client.name ~= "rubocop"
+--       end,
+--     }
+--   end,
+-- })
