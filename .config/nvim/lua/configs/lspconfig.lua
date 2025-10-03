@@ -4,13 +4,13 @@
 require("nvchad.configs.lspconfig").defaults()
 
 local function odoo_ls()
-  local server = "odoo_ls_server"
+  local server = "odoo_ls_server" -- odoo_ls_server is installed under ~/bin/odoo_ls_server
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  capabilities.general.markdown = {
-    parser = "marked",
-    version = "",
-  }
+  capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+  capabilities.textDocument.hover.contentFormat = { "markdown", "plaintext" }
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
   return {
     cmd = {
       server,
@@ -18,7 +18,7 @@ local function odoo_ls()
       "/home/guewenb/sources/typeshed/stdlib",
     },
     root_markers = { "odools.toml" },
-    filetypes = { "python", "xml" },
+    filetypes = { "python", "xml", "csv" },
     capabilities = capabilities,
     settings = {
       Odoo = {
