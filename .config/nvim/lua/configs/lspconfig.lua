@@ -3,17 +3,6 @@
 --
 require("nvchad.configs.lspconfig").defaults()
 
--- local lsp_configurations = require "lspconfig.configs"
--- lsp_configurations.odoo_lsp = {
---   default_config = {
---     name = "odoo-lsp",
---     cmd = { "odoo-lsp" },
---     filetypes = { "javascript", "xml", "python" },
---     root_dir = require("lspconfig.util").root_pattern(".odoo_lsp", ".odoo_lsp.json"),
---   },
--- }
---
-
 local function odoo_ls()
   local server = "odoo_ls_server"
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -28,12 +17,8 @@ local function odoo_ls()
       "--stdlib",
       "/home/guewenb/sources/typeshed/stdlib",
     },
-    --root_dir = "/home/guewenb/.local/share/nvim/odoo",
+    root_markers = { "odools.toml" },
     filetypes = { "python", "xml" },
-    -- workspace_folders = { {
-    --   uri = vim.uri_from_fname "/home/whe/src",
-    --   name = "main_folder",
-    -- } },
     capabilities = capabilities,
     settings = {
       Odoo = {
@@ -60,7 +45,6 @@ local servers = {
     filetypes = { "ruby" },
     root_markers = { "sorbet" },
   },
-  odoo_lsp = {},
   pyright = {},
   dockerls = {},
   yamlls = {},
