@@ -11,7 +11,7 @@
   recent-branches = "!git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | nl -w2 -s'> ' "
   r = "!f() { if [ -z \"$1\" ]; then git recent-branches; else git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format='%(refname:short)' | awk -v var=\"$1\" 'NR==var' | xargs git checkout ; fi ; }; f"
   go = "!git for-each-ref --count=50 --sort=-committerdate refs/heads/ --format='%(refname:short)' | fzf | xargs -o git checkout"
-  f = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git fixup"
+  f = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -12 | xargs -o git fixup"
   fixup = "!f() { \
            if [ -z \"$1\" ]; then \
              git f; \
@@ -21,7 +21,7 @@
            fi ; }; f"
   yank = "!f() { git log -n 50 --pretty=format:'%h %s' --no-merges \"$@\" | fzf | cut -c -12 | xargs wl-copy ; }; f"
   y = yank
-  choose-rebase = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o git rebase -i --autosquash "
+  choose-rebase = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -12 | xargs -o git rebase -i --autosquash "
   cr = choose-rebase
 
 [color]
