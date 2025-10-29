@@ -43,7 +43,7 @@ local servers = {
   sorbet = {
     cmd = { "bundle", "exec", "srb", "tc", "--lsp" },
     filetypes = { "ruby" },
-    root_markers = { "sorbet" },
+    root_markers = { ".rubocop.yml" },
   },
   pyright = {},
   dockerls = {},
