@@ -25,7 +25,7 @@ piow
 zsh-autosuggestions
 gnome-power-manager
 blueberry
-swww
+awww
 z
 https://github.com/tmux-plugins/tpm
 ```
