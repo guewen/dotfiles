@@ -78,3 +78,34 @@ end, {
 --     }
 --   end,
 -- })
+--
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  group = vim.api.nvim_create_augroup("FileWithLine", { clear = true }),
+  pattern = "*",
+  callback = function()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    local filename, line_num = buf_name:match "^(.*):(%d+)$"
+
+    if filename and line_num and vim.fn.filereadable(filename) == 1 then
+      local bad_buf = vim.api.nvim_get_current_buf()
+
+      -- Defer execution to allow Neovim to handle swap-file prompts safely
+      -- This avoids issues when the file already exists and has a swap file
+      vim.schedule(function()
+        vim.cmd("edit " .. filename)
+
+        -- Move cursor to the line
+        -- (0 is the current buffer, line_num is 1-indexed, col is 0-indexed)
+        pcall(vim.api.nvim_win_set_cursor, 0, { tonumber(line_num), 0 })
+
+        vim.cmd "normal! zz"
+
+        -- Clean up the ghost buffer "file:line"
+        if vim.api.nvim_buf_is_valid(bad_buf) then
+          vim.api.nvim_buf_delete(bad_buf, { force = true })
+        end
+      end)
+    end
+  end,
+})
