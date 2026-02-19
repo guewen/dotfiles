@@ -29,7 +29,7 @@ local function odoo_ls()
 end
 
 local servers = {
-  odoo_ls = odoo_ls(),
+  -- odoo_ls = odoo_ls(),
   html = {},
   cssls = {},
   awk_ls = {},
@@ -45,10 +45,29 @@ local servers = {
     filetypes = { "ruby" },
     root_markers = { ".rubocop.yml" },
   },
-  pyright = {},
+  ruff = {},
+  basedpyright = {
+    handlers = {
+      ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        if result and result.diagnostics then
+          local filtered = {}
+          for _, d in ipairs(result.diagnostics) do
+            -- I want to hide baselined "hints"
+            if not (d.message and d.message:match "^Baselined:") then
+              table.insert(filtered, d)
+            end
+          end
+          result.diagnostics = filtered
+        end
+        vim.lsp.handlers["textDocument/publishDiagnostics"](err, result, ctx, config)
+      end,
+    },
+  },
   dockerls = {},
   yamlls = {},
   ts_ls = {},
+  -- https://github.com/supabase-community/postgres-language-server?tab=readme-ov-file
+  postgres_lsp = {},
 }
 
 for name, opts in pairs(servers) do
