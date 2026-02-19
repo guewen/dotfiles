@@ -21,6 +21,9 @@ local lga_actions = require "telescope-live-grep-args.actions"
 telescope.setup {
   defaults = {
     winblend = 30,
+    cache_picker = {
+      num_pickers = 50,
+    },
     mappings = {
       i = {
         ["<C-space>"] = require("telescope.actions").to_fuzzy_refine,
