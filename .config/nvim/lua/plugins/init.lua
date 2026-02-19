@@ -111,6 +111,14 @@ return {
   },
 
   {
+    "nvim-telescope/telescope-frecency.nvim",
+    version = "*",
+    config = function()
+      require("telescope").load_extension "frecency"
+    end,
+  },
+
+  {
     "princejoogie/dir-telescope.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
