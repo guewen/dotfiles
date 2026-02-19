@@ -21,7 +21,7 @@
            fi ; }; f"
   yank = "!f() { git log -n 50 --pretty=format:'%h %s' --no-merges \"$@\" | fzf | cut -c -11 | xargs wl-copy ; }; f"
   y = yank
-  choose-rebase = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -11 | xargs -I % -o git rebase -i --autosquash '%~1'"
+  choose-rebase = "!git log -n 50 --pretty=format:'%h %s' --no-merges --abbrev=11 | fzf | cut -c -11 | xargs -I % -o git rebase -i --autosquash '%~1'"
   cr = choose-rebase
 
 [color]
