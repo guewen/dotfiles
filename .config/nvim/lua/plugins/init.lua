@@ -58,6 +58,15 @@ return {
         "json",
         "sql",
       },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          -- init_selection = "<C-o>",
+          node_incremental = "v",
+          -- scope_incremental = "<C-O>",
+          node_decremental = "V",
+        },
+      },
     },
   },
 
