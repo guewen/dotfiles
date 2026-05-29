@@ -47,6 +47,19 @@ local servers = {
   },
   ruff = {},
   basedpyright = {
+    settings = {
+      basedpyright = {
+        autoSearchPaths = true,
+        diagnosticMode = "openFilesOnly",
+        useLibraryCodeForTypes = true,
+        typeCheckingMode = "standard",
+      },
+    },
+    analysis = {
+      autoSearchPaths = true,
+      diagnosticMode = "openFilesOnly",
+      useLibraryCodeForTypes = true,
+    },
     handlers = {
       ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
         if result and result.diagnostics then
