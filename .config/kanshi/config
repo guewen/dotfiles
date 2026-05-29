@@ -1,0 +1,32 @@
+# ==========================================
+# DELL U3421WE + Laptop
+# ==========================================
+
+profile desk1_docked {
+    output "*DELL U3421WE*" mode 3440x1440@60 scale 1.0 position 0,0
+    output "eDP-1" enable scale 1.0 position 0,1440
+}
+
+profile desk1_clamshell {
+    output "eDP-1" disable
+    output "*DELL U3421WE*" mode 3440x1440@60 scale 1.0 position 0,0
+}
+
+
+# ==========================================
+# ODYSSEY G70NC + Laptop
+# ==========================================
+
+profile desk2_docked {
+    output "*Odyssey G70NC*" mode 3840x2160@30 scale 1.1 position 0,0
+    output "eDP-1" enable scale 1.0 position 0,1964
+}
+
+profile desk2_clamshell {
+    output "eDP-1" disable
+    output "*Odyssey G70NC*" mode 3840x2160@30 scale 1.1 position 0,0
+}
+
+profile undocked {
+    output "eDP-1" enable scale 1.0 position 0,0
+}

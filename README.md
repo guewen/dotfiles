@@ -24,9 +24,10 @@ tmux
 piow
 zsh-autosuggestions
 gnome-power-manager
-blueberry
-awww
 z
 https://github.com/tmux-plugins/tpm
 tree-sitter-cli (https://github.com/tree-sitter/tree-sitter/tree/master/crates/cli)
+niri
+noctalia-shell
+kanshi
 ```
