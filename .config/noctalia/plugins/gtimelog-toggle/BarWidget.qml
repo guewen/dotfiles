@@ -24,7 +24,7 @@ Item {
     property string lastStatus: ""
 
     property string pyCalcScript: `import sys, os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 log_file = os.path.expanduser("~/.local/share/gtimelog/timelog.txt")
 if not os.path.exists(log_file):
@@ -32,44 +32,65 @@ if not os.path.exists(log_file):
     print("0h 00m")
     sys.exit(0)
 
-today = datetime.now().strftime("%Y-%m-%d")
-total_seconds = 0
-last_time = None
+now = datetime.now()
+today = now.strftime("%Y-%m-%d")
+start_of_week = (now - timedelta(days=now.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+
+today_total_seconds = 0
+week_total_seconds = 0
+last_time_today = None
+last_time_week = None
 has_today = False
 today_lines = []
 
 with open(log_file, "r") as f:
     for line in f:
         line = line.strip()
-        if not line or not line.startswith(today): 
+        if not line:
             continue
-            
-        has_today = True
-        today_lines.append(line[11:])
-        
+
         parts = line.split(": ", 1)
-        if len(parts) != 2: 
+        if len(parts) != 2:
             continue
-            
+
         try:
             current_time = datetime.strptime(parts[0], "%Y-%m-%d %H:%M")
         except ValueError:
             continue
-            
-        if last_time is not None:
-            if not (parts[1].endswith("**") or parts[1].endswith("***")):
-                total_seconds += (current_time - last_time).total_seconds()
-                
-        last_time = current_time
 
-elapsed_since_last_time = (datetime.now() - last_time).total_seconds() if last_time else 0
+        # Weekly Calculation
+        if current_time >= start_of_week:
+            if last_time_week is not None and last_time_week.date() == current_time.date():
+                if not (parts[1].endswith("**") or parts[1].endswith("***")):
+                    week_total_seconds += (current_time - last_time_week).total_seconds()
+            last_time_week = current_time
 
-hours = int(total_seconds // 3600)
-minutes = int((total_seconds % 3600) // 60)
+        # Daily Calculation
+        if line.startswith(today):
+            has_today = True
+            today_lines.append(line[11:])
+
+            if last_time_today is not None:
+                if not (parts[1].endswith("**") or parts[1].endswith("***")):
+                    today_total_seconds += (current_time - last_time_today).total_seconds()
+
+            last_time_today = current_time
+
+elapsed_since_last_time = (datetime.now() - last_time_today).total_seconds() if last_time_today else 0
+
+hours = int(today_total_seconds // 3600)
+minutes = int((today_total_seconds % 3600) // 60)
 elapsed_hours = int(elapsed_since_last_time // 3600)
 elapsed_minutes = int((elapsed_since_last_time % 3600) // 60)
 
 time_str = "{}h {:02d}m + {}h {:02d}m".format(hours, minutes, elapsed_hours, elapsed_minutes)
+
+# Calculate elapsed time for the week if currently working
+week_elapsed = elapsed_since_last_time
+total_week_seconds = week_total_seconds + week_elapsed
+week_hours = int(total_week_seconds // 3600)
+week_minutes = int((total_week_seconds % 3600) // 60)
+week_str = "{}h {:02d}m".format(week_hours, week_minutes)
 
 print("true" if has_today else "false")
 print(time_str)
@@ -79,24 +100,25 @@ if has_today:
         print(tl)
     print("")
     print("Total today: " + time_str)
+print("Total week:  " + week_str)
 `
 
     Process {
         id: timeProcess
         command: ["python3", "-c", root.pyCalcScript]
-        running: true 
+        running: true
         stdout: StdioCollector {
             id: stdoutCol
             onStreamFinished: {
                 let text = stdoutCol.text.trim();
                 if (text !== "") {
                     let lines = text.replace(/\r/g, "").split("\n");
-                    
+
                     if (lines.length >= 2) {
                         root.hasEntryToday = (lines[0].trim() === "true");
                         root.workedHours = lines[1].trim();
-                        
-                        if (lines.length > 2 && root.hasEntryToday) {
+
+                        if (lines.length > 2) {
                             root.daySummary = lines.slice(2).join("\n");
                         } else {
                             root.daySummary = "No entries today.";
@@ -167,7 +189,7 @@ if action == "in":
         entry = "arrived ***"
     else:
         entry = "away **"
-    
+
     lines.append(ts_str + " " + entry + nl)
 
 elif action == "work":
@@ -185,24 +207,24 @@ last_time = None
 
 for line in lines:
     line = line.strip()
-    if not line or not line.startswith(today_str): 
+    if not line or not line.startswith(today_str):
         continue
-    
+
     today_lines.append(line[11:])
-    
+
     parts = line.split(": ", 1)
-    if len(parts) != 2: 
+    if len(parts) != 2:
         continue
-        
+
     try:
         current_time = datetime.strptime(parts[0], "%Y-%m-%d %H:%M")
     except ValueError:
         continue
-        
+
     if last_time is not None:
         if not (parts[1].endswith("**") or parts[1].endswith("***")):
             total_seconds += (current_time - last_time).total_seconds()
-            
+
     last_time = current_time
 
 hours = int(total_seconds // 3600)
@@ -212,7 +234,7 @@ total_time_str = "{}h {:02d}m".format(hours, minutes)
 notify_body = "<br>".join(today_lines) + "<br><br><b>Total today: " + total_time_str + "</b>"
 subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
 `;
-        
+
         cmdProcess.command = ["python3", "-c", pyWriteScript];
         cmdProcess.running = true;
     }
@@ -226,19 +248,17 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
             id: widgetHover
         }
 
-        // Native Quickshell PopupWindow for the custom hovering summary
         PopupWindow {
             id: summaryPopup
             visible: widgetHover.hovered
             color: "transparent"
-            
-            // Map the position exactly underneath the bar widget
+
             anchor {
                 window: root.QsWindow.window
                 onAnchoring: {
                     let pos = root.QsWindow.contentItem.mapFromItem(
-                        root, 
-                        (root.width / 2) - (summaryPopup.width / 2), 
+                        root,
+                        (root.width / 2) - (summaryPopup.width / 2),
                         root.height + Style.marginM
                     );
                     anchor.rect.x = pos.x;
@@ -266,8 +286,7 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
                     color: Color.mOnSurface
                     pointSize: Style.fontSizeS
                     horizontalAlignment: Text.AlignLeft
-                    
-                    // Essential for multiline display in Noctalia
+
                     maximumLineCount: 100
                     wrapMode: Text.NoWrap
                     lineHeight: 1.2
@@ -284,12 +303,12 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
 
             NText {
                 property bool needClockIn: !root.hasEntryToday
-                
+
                 text: {
                     let emoji = needClockIn ?  "[¬º-°]¬  " : "ヽ(｀Д´)ﾉ ┻━┻  ";
                     return emoji + root.workedHours;
                 }
-                
+
                 color: needClockIn ? Color.mSurfaceVariant : Color.mOnSurface
                 pointSize: Style.fontSizeS
                 font.bold: true
@@ -331,7 +350,7 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
 
                 NIcon {
                     anchors.centerIn: parent
-                    icon: "coffee" 
+                    icon: "coffee"
                     color: Color.mOnSurface
                     width: Style.iconSizeM
                     height: Style.iconSizeM
@@ -355,7 +374,7 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
 
                 NIcon {
                     anchors.centerIn: parent
-                    icon: "cpu" 
+                    icon: "cpu"
                     color: Color.mOnSurface
                     width: Style.iconSizeM
                     height: Style.iconSizeM
@@ -363,4 +382,4 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
             }
         }
     }
-}
+  }
