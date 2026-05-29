@@ -1,0 +1,13 @@
+{
+  "id": "gtimelog-toggle",
+  "name": "GTimeLog Toggle",
+  "version": "1.0.0",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "Guewen Baconnier",
+  "license": "MIT",
+  "description": "Sign in and out of gtimelog directly from the Noctalia bar.",
+  "tags": ["Bar", "Productivity"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  }
+}
