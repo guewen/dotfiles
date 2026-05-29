@@ -160,14 +160,15 @@ print("Total week:  " + week_str)
     function executeLog(action) {
         if (cmdProcess.running) return;
 
-        let pyWriteScript = `import sys, os, subprocess
+        let pyWriteScript = `import sys, os, subprocess, tempfile
 from datetime import datetime
 
 action = "${action}"
 log_file = os.path.expanduser("~/.local/share/gtimelog/timelog.txt")
+log_dir = os.path.dirname(log_file)
 nl = chr(10)
 
-os.makedirs(os.path.dirname(log_file), exist_ok=True)
+os.makedirs(log_dir, exist_ok=True)
 
 now = datetime.now()
 today_str = now.strftime("%Y-%m-%d")
@@ -198,8 +199,13 @@ elif action == "work":
     else:
         lines.append(ts_str + " work" + nl)
 
-with open(log_file, 'w') as f:
-    f.writelines(lines)
+with tempfile.NamedTemporaryFile("w", dir=log_dir, delete=False) as tf:
+    tf.writelines(lines)
+    tf.flush()
+    os.fsync(tf.fileno())
+    temp_name = tf.name
+
+os.replace(temp_name, log_file)
 
 today_lines = []
 total_seconds = 0
