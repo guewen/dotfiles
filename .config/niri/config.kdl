@@ -297,6 +297,7 @@ layer-rule {
 // See the binds section below for more spawn examples.
 
 spawn-at-startup "kanshi"
+spawn-at-startup "filen-desktop"
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=gtk3" "qs" "-c" "noctalia-shell"

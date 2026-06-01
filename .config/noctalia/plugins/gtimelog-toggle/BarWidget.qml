@@ -315,7 +315,6 @@ subprocess.run(["notify-send", "-a", "GTimeLog", "GTimeLog", notify_body])
                     return emoji + root.workedHours;
                 }
 
-                color: needClockIn ? Color.mSurfaceVariant : Color.mOnSurface
                 pointSize: Style.fontSizeS
                 font.bold: true
                 Layout.alignment: Qt.AlignVCenter

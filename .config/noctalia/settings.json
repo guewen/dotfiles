@@ -88,7 +88,7 @@
                         },
                         {
                             "characterCount": 2,
-                            "colorizeIcons": false,
+                            "colorizeIcons": true,
                             "emptyColor": "secondary",
                             "enableScrollWheel": true,
                             "focusedColor": "primary",
@@ -100,9 +100,9 @@
                             "id": "Workspace",
                             "labelMode": "index",
                             "occupiedColor": "secondary",
-                            "pillSize": 0.6,
+                            "pillSize": 0.8,
                             "showApplications": false,
-                            "showApplicationsHover": false,
+                            "showApplicationsHover": true,
                             "showBadge": true,
                             "showLabelsOnlyWhenOccupied": true,
                             "unfocusedIconsOpacity": 1
@@ -258,7 +258,7 @@
                         },
                         {
                             "deviceNativePath": "__default__",
-                            "displayMode": "graphic-clean",
+                            "displayMode": "graphic",
                             "hideIfIdle": false,
                             "hideIfNotDetected": true,
                             "id": "Battery",
