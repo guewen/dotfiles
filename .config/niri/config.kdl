@@ -296,8 +296,6 @@ layer-rule {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "foot --server"
-
 spawn-at-startup "kanshi"
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
@@ -305,6 +303,8 @@ spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=gtk3" "qs" "-c" "noctalia-shell"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+
+spawn-sh-at-startup "foot --server"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
