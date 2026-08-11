@@ -1,5 +1,5 @@
 export EDITOR='nvim'
-export TERMINAL='footclient'
+export TERMINAL='kitty'
 export LESS='-R'
 export LESS="-SXFR"
 export RIPGREP_CONFIG_PATH=~/.config/ripgreprc

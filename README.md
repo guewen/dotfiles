@@ -16,6 +16,7 @@ See https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-reposi
 Packages to install (at least)
 
 ```
+mise
 starship
 ripgrep
 keychain
@@ -30,4 +31,5 @@ tree-sitter-cli (https://github.com/tree-sitter/tree-sitter/tree/master/crates/c
 niri
 noctalia-shell
 kanshi
+kitty
 ```
