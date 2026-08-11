@@ -1,0 +1,22 @@
+id           = "guewenb/timelog"
+name         = "TimeLog"
+version      = "1.0.0"
+min_noctalia = "5.0.0"
+plugin_api = 9
+author       = "Guewen Baconnier"
+license      = "MIT"
+icon         = "coffee"
+description  = "Sign in and out of gtimelog directly from the Noctalia bar."
+tags         = ["bar", "productivity"]
+
+[[widget]]
+id    = "bar-time"
+entry = "bar_time.luau"
+
+[[widget]]
+id    = "bar-in"
+entry = "bar_in.luau"
+
+[[widget]]
+id    = "bar-work"
+entry = "bar_work.luau"
