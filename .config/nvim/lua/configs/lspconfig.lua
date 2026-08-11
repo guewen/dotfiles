@@ -30,6 +30,11 @@ end
 
 local servers = {
   -- odoo_ls = odoo_ls(),
+  odoo_ls = {
+    cmd = { "odoo_ls_server", "--stdlib", "/home/guewenb/sources/typeshed/stdlib" },
+    root_markers = { "odools.toml" },
+    filetypes = { "python", "xml", "csv" },
+  },
   html = {},
   cssls = {},
   awk_ls = {},
@@ -48,11 +53,22 @@ local servers = {
   ruff = {},
   basedpyright = {
     settings = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
       basedpyright = {
         autoSearchPaths = true,
         diagnosticMode = "openFilesOnly",
         useLibraryCodeForTypes = true,
         typeCheckingMode = "standard",
+        analysis = {
+          -- ruff (F401/F841/F821/F811) already covers these, avoid duplicate diagnostics
+          diagnosticSeverityOverrides = {
+            reportUnusedImport = "none",
+            reportUnusedVariable = "none",
+            reportUndefinedVariable = "none",
+            reportRedeclaration = "none",
+          },
+        },
       },
     },
     analysis = {
